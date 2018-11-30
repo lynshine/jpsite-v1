@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>短信登录</h3>
+<form action="/authentication/mobile" method="post">
+    <table>
+        <tr>
+            <td>手机号码</td>
+            <td><input type="text" name="mobile" id="mobile"></td>
+        </tr>
+        <tr>
+            <td>短信验证码</td>
+            <td>
+                <input type="text" name="smsCode">
+                <button type="button" id="bt1" onclick="getSmsCode()">发生验证码</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">登录</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    function getSmsCode() {
+        var mobile = $("input[name='mobile']").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/code/sms",//url
+            contentType : "application/x-www-form-urlencoded",
+            data: {"mobile":mobile},
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                alert(result.message);
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+</html>
