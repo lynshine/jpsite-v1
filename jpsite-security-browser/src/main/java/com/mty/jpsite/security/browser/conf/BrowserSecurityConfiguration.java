@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
@@ -43,6 +44,8 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private SpringSocialConfigurer jpSpringSocialConfigurer;
     @Autowired
     private InvalidSessionStrategy invalidSessionStrategy;
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -60,12 +63,16 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .and()
                 .sessionManagement()
-//                .invalidSessionUrl("/session/invalid")
+//                .invalidSessionUrl("/session/invalid")  直接session失效
                 .invalidSessionStrategy(invalidSessionStrategy)
                 .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())  //session并发
                 .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())  //session的数量达到最大数量之后，阻止后来的登录行为
                 .expiredSessionStrategy(sessionInformationExpiredStrategy)
                 .and()
+                .and()
+                .logout().logoutUrl("/signOut")
+                .logoutSuccessHandler(logoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
                 .and()
                 .authorizeRequests()
                 .antMatchers(
@@ -73,6 +80,7 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE,
                         securityProperties.getBrowser().getLoginPage(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+                        securityProperties.getBrowser().getSignOutUrl(),
                         securityProperties.getBrowser().getSignUpUrl(),
                         "/user/regist",
 //                        "/session/invalid",
