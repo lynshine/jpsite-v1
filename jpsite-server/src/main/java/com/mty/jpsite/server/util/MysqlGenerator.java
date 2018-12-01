@@ -38,7 +38,7 @@ public class MysqlGenerator {
     private static final String USER_NAME = "root";
     private static final String PASSWORD = "root";
     private static final String SOURCE_PATH = File.separator + "src" + File.separator + "main" + File.separator + "java";
-    private static final String XML_PATH = File.separator + "src" + File.separator + "main" + File.separator + "resource";
+    private static final String XML_PATH = File.separator + "src" + File.separator + "main" + File.separator + "resources";
     private static final String OUT_PATH = System.getProperty("user.dir");
 
     /**
