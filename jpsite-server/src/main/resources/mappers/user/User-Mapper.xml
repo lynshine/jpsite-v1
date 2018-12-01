@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mty.jpsite.server.dao.user.UserDao">
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mty.jpsite.server.entity.user.User">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="login_name" property="loginName" />
+        <result column="login_password" property="loginPassword" />
+        <result column="create_at" property="createAt" />
+        <result column="update_at" property="updateAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, login_name, login_password, create_at, update_at
+    </sql>
+
+    <select id="selectPageVo" resultType="com.mty.jpsite.server.entity.user.User">
+      SELECT id,name FROM user WHERE `name`=#{name}
+    </select>
+
+</mapper>
