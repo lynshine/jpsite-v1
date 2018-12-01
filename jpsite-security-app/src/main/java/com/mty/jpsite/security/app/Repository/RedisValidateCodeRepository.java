@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mty.jpsite.security.app.store;
+package com.mty.jpsite.security.app.Repository;
 
 import com.mty.jpsite.security.core.domain.ValidateCode;
 import com.mty.jpsite.security.core.enums.ValidateCodeType;
