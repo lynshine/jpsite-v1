@@ -1,8 +1,8 @@
 package com.mty.jpsite.security.browser.session;
 
 import com.mty.jpsite.security.core.enums.ValidateCodeType;
-import com.mty.jpsite.security.browser.domain.ValidateCode;
-import com.mty.jpsite.security.browser.face.ValidateCodeRepository;
+import com.mty.jpsite.security.core.domain.ValidateCode;
+import com.mty.jpsite.security.core.face.ValidateCodeRepository;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.stereotype.Component;

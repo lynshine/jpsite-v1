@@ -1,6 +1,6 @@
 package com.mty.jpsite.security.browser.face.impl;
 
-import com.mty.jpsite.security.browser.domain.ValidateCode;
+import com.mty.jpsite.security.core.domain.ValidateCode;
 import com.mty.jpsite.security.browser.face.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

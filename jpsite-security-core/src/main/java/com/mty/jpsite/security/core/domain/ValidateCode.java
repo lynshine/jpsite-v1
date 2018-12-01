@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.browser.domain;
+package com.mty.jpsite.security.core.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

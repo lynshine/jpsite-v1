@@ -1,5 +1,7 @@
 package com.mty.jpsite.security.browser.domain;
 
+import com.mty.jpsite.security.core.domain.ValidateCode;
+
 import java.awt.image.BufferedImage;
 
 /**

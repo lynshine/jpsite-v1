@@ -1,6 +1,6 @@
 package com.mty.jpsite.security.browser.face.generator;
 
-import com.mty.jpsite.security.browser.domain.ValidateCode;
+import com.mty.jpsite.security.core.domain.ValidateCode;
 import com.mty.jpsite.security.browser.face.validateCodeGenerator;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.apache.commons.lang.RandomStringUtils;
