@@ -1,6 +1,7 @@
 package com.mty.jpsite.security.social.qq.conf;
 
 import com.mty.jpsite.security.core.properties.SecurityProperties;
+import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
 import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +42,9 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         // Encryptors加密方式
@@ -67,10 +71,11 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     @Bean
     public SpringSocialConfigurer jpSpringSocialConfigurer() {
         String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
-        JpSpringSocialConfigurer jpSpringSocialConfigurer = new JpSpringSocialConfigurer(filterProcessesUrl);
+        JpSpringSocialConfigurer springSocialConfigurer = new JpSpringSocialConfigurer(filterProcessesUrl);
         // 注册页
-        jpSpringSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
-        return jpSpringSocialConfigurer;
+        springSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
+        return springSocialConfigurer;
     }
 
     @Override

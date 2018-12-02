@@ -1,5 +1,6 @@
 package com.mty.jpsite.security.social.qq.conf;
 
+import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
@@ -9,6 +10,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 public class JpSpringSocialConfigurer extends SpringSocialConfigurer {
 
     private String filterProcessesUrl;
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
 
     public JpSpringSocialConfigurer(String filterProcessesUrl) {
         this.filterProcessesUrl = filterProcessesUrl;
@@ -22,7 +24,19 @@ public class JpSpringSocialConfigurer extends SpringSocialConfigurer {
     protected <T> T postProcess(T object) {
         SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
         filter.setFilterProcessesUrl(filterProcessesUrl);
+        /**sh使用后处理器*/
+        if(socialAuthenticationFilterPostProcessor != null){
+            socialAuthenticationFilterPostProcessor.process(filter);
+        }
         return (T) filter;
+    }
+
+    public SocialAuthenticationFilterPostProcessor getSocialAuthenticationFilterPostProcessor() {
+        return socialAuthenticationFilterPostProcessor;
+    }
+
+    public void setSocialAuthenticationFilterPostProcessor(SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor) {
+        this.socialAuthenticationFilterPostProcessor = socialAuthenticationFilterPostProcessor;
     }
 
     public String getFilterProcessesUrl() {
