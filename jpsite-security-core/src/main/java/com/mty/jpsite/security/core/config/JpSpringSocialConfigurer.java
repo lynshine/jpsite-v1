@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.social.qq.conf;
+package com.mty.jpsite.security.core.config;
 
 import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
 import org.springframework.social.security.SocialAuthenticationFilter;

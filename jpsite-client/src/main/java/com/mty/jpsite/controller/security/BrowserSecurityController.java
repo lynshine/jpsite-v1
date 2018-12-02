@@ -3,7 +3,7 @@ package com.mty.jpsite.controller.security;
 import com.mty.jpsite.security.core.domain.SecurityResponse;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
-import com.mty.jpsite.security.social.qq.domain.SocialUserInfo;
+import com.mty.jpsite.security.core.domain.SocialUserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.social.qq.domain;
+package com.mty.jpsite.security.core.domain;
 
 /**
  * SocialUserInfo

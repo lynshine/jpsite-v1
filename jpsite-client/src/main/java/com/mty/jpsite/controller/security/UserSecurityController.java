@@ -39,6 +39,11 @@ public class UserSecurityController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    /**
+     * app 模式
+     * @param user
+     * @param request
+     */
 //	@Autowired
 //	private AppSingUpUtils appSingUpUtils;
 
@@ -51,6 +56,9 @@ public class UserSecurityController {
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
         String userId = user.getUsername();
         providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+        /**
+         * app注册模式
+         */
 //		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
     }
 

@@ -1,5 +1,6 @@
 package com.mty.jpsite.security.social.qq.conf;
 
+import com.mty.jpsite.security.core.config.JpSpringSocialConfigurer;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
 import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;

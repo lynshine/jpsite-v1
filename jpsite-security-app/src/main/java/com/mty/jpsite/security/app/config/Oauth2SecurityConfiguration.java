@@ -54,6 +54,7 @@ class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         securityProperties.getBrowser().getLoginPage(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                         securityProperties.getBrowser().getSignOutUrl(),
+                        SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL,
                         securityProperties.getBrowser().getSignUpUrl(),
                         "/user/regist",
 //                        "/session/invalid",
