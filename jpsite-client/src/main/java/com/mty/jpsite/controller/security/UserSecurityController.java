@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.mty.jpsite.security.app.common.AppSingUpUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,25 +42,23 @@ public class UserSecurityController {
 
     /**
      * app 模式
-     * @param user
-     * @param request
      */
-//	@Autowired
-//	private AppSingUpUtils appSingUpUtils;
+	@Autowired
+	private AppSingUpUtils appSingUpUtils;
 
-//	@Autowired
-//	private SecurityProperties securityProperties;
-
+/*	@Autowired
+	private SecurityProperties securityProperties;*/
     @PostMapping("/regist")
     public void regist(User user, HttpServletRequest request) {
 
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
         String userId = user.getUsername();
-        providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+       //todo 瀏覽器使用，appSingUpUtils  providerSignInUtils 只能用一個
+        // providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
         /**
          * app注册模式
          */
-//		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
+		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
     }
 
     @GetMapping("/me")

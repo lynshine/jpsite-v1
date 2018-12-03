@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mty.jpsite.security.app;
+package com.mty.jpsite.security.app.common;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.concurrent.TimeUnit;
 
 /**
- * app环境下替换providerSignInUtils，避免由于没有session导致读不到社交用户信息的问题
+ * app环境下使用providerSignInUtils，避免由于没有session导致读不到社交用户信息的问题
  * 
  * @author zhailiang
  *
@@ -70,7 +70,7 @@ public class AppSingUpUtils {
 		if (StringUtils.isBlank(deviceId)) {
 			throw new AppSecretException("设备id参数不能为空");
 		}
-		return "imooc:security:social.connect." + deviceId;
+		return "jpsite:security:social.connect." + deviceId;
 	}
 
 }

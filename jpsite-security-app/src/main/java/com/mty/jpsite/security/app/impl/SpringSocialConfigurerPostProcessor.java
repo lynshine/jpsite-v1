@@ -19,7 +19,7 @@ public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {
 	}
 
 	/**
-	 * 一道用户注册
+	 * appd第三方用户注册
 	 * @param bean
 	 * @param beanName
 	 * @return
@@ -27,6 +27,9 @@ public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {
 	 */
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		/**
+		 * 强制修改注册页面
+		 */
 		if(StringUtils.equals(beanName, "jpSpringSocialConfigurer")){
 			JpSpringSocialConfigurer config = (JpSpringSocialConfigurer)bean;
 			config.signupUrl(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL);

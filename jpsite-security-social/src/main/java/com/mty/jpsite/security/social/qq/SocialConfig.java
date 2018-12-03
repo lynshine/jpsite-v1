@@ -1,12 +1,10 @@
-package com.mty.jpsite.security.social.qq.conf;
+package com.mty.jpsite.security.social.qq;
 
-import com.mty.jpsite.security.app.impl.AppSocialAuthenticationFilterPostProcessor;
 import com.mty.jpsite.security.core.config.JpSpringSocialConfigurer;
-import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
+import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -70,7 +68,7 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     /**
      * 社交登录配置类，供浏览器或app模块引入设计登录配置用。
      *
-     * @return
+     * @return BeanName jpSpringSocialConfigurer
      */
     @Bean
     public SpringSocialConfigurer jpSpringSocialConfigurer() {
@@ -79,8 +77,7 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
         // 注册页
         springSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
         // todo 不知道为什么注解注入没有用
-//        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
-        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(new AppSocialAuthenticationFilterPostProcessor());
+        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
 
         return springSocialConfigurer;
     }
