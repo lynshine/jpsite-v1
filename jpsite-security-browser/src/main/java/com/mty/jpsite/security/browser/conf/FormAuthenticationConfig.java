@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @author zhailiang
  */
 @Component
-public class FormAuthenticationConfig extends WebSecurityConfigurerAdapter {
+public class FormAuthenticationConfig {
 
 	@Autowired
 	protected AuthenticationSuccessHandler jpsiteAuthenticationSuccessHandler;

@@ -64,7 +64,6 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .and()
                 .sessionManagement()
-//                .invalidSessionUrl("/session/invalid")  直接session失效
                 .invalidSessionStrategy(invalidSessionStrategy)
                 .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())  //session并发
                 .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())  //session的数量达到最大数量之后，阻止后来的登录行为
@@ -84,7 +83,6 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         securityProperties.getBrowser().getSignOutUrl(),
                         securityProperties.getBrowser().getSignUpUrl(),
                         "/user/regist",
-//                        "/session/invalid",
                         "/actuator/*"
                 )
                 .permitAll()

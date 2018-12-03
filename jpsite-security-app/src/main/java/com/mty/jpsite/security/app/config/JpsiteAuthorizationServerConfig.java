@@ -30,7 +30,7 @@ public class JpsiteAuthorizationServerConfig extends AuthorizationServerConfigur
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("sina")
-                .secret(passwordEncoder.encode("sinasecrect"))
+                .secret("sinasecrect")
                 .redirectUris("http://example.com")
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password")
                 .scopes("all");
@@ -38,7 +38,7 @@ public class JpsiteAuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.passwordEncoder(passwordEncoder);
+       // security.passwordEncoder(passwordEncoder);
     }
 //
     @Override

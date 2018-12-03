@@ -1,10 +1,12 @@
 package com.mty.jpsite.security.social.qq.conf;
 
+import com.mty.jpsite.security.app.impl.AppSocialAuthenticationFilterPostProcessor;
 import com.mty.jpsite.security.core.config.JpSpringSocialConfigurer;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
 import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -23,6 +25,7 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.SpringSocialConfigurer;
+
 import javax.sql.DataSource;
 
 /**
@@ -51,7 +54,7 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
         // Encryptors加密方式
         JdbcUsersConnectionRepository usersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 //        usersConnectionRepository.setTablePrefix("fe");
-        if(connectionSignUp != null){
+        if (connectionSignUp != null) {
             usersConnectionRepository.setConnectionSignUp(connectionSignUp);
         }
         return usersConnectionRepository;
@@ -75,7 +78,10 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
         JpSpringSocialConfigurer springSocialConfigurer = new JpSpringSocialConfigurer(filterProcessesUrl);
         // 注册页
         springSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
-        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
+        // todo 不知道为什么注解注入没有用
+//        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
+        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(new AppSocialAuthenticationFilterPostProcessor());
+
         return springSocialConfigurer;
     }
 

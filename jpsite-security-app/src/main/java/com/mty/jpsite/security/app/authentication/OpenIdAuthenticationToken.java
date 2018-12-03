@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mty.jpsite.security.app.authentication;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -10,8 +7,7 @@ import org.springframework.security.core.SpringSecurityCoreVersion;
 import java.util.Collection;
 
 /**
- * @author zhailiang
- *
+ * 封装 openId 的认证信息
  */
 public class OpenIdAuthenticationToken extends AbstractAuthenticationToken {
 

@@ -24,7 +24,7 @@ public class JpSpringSocialConfigurer extends SpringSocialConfigurer {
     protected <T> T postProcess(T object) {
         SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
         filter.setFilterProcessesUrl(filterProcessesUrl);
-        /**sh使用后处理器*/
+        /**app環境下使用的后置处理器*/
         if(socialAuthenticationFilterPostProcessor != null){
             socialAuthenticationFilterPostProcessor.process(filter);
         }

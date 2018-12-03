@@ -36,7 +36,7 @@ public class AppSecurityController extends SocialController {
      * @param request
      * @return
      */
-    @GetMapping(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL)
+    @GetMapping(SecurityConstants.DEFAULT_SOCIAL_USER_SIGN_URL)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));

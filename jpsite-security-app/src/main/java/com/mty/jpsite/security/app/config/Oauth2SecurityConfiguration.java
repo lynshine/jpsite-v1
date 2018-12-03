@@ -1,5 +1,6 @@
 package com.mty.jpsite.security.app.config;
 
+import com.mty.jpsite.security.app.authentication.OpenIdAuthenticationSecurityConfig;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private SecurityProperties securityProperties;
     @Autowired
     private SpringSocialConfigurer jpSpringSocialConfigurer;
+    @Autowired
+    private OpenIdAuthenticationSecurityConfig openIdAuthenticationSecurityConfig;
     /**
      * 登录成功处理器
      */
@@ -47,6 +50,8 @@ class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //   .and()
                 .apply(jpSpringSocialConfigurer)
                 .and()
+                .apply(openIdAuthenticationSecurityConfig)
+                .and()
                 .authorizeRequests()
                 .antMatchers(
                         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
@@ -54,10 +59,8 @@ class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         securityProperties.getBrowser().getLoginPage(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
                         securityProperties.getBrowser().getSignOutUrl(),
-                        SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL,
+                        SecurityConstants.DEFAULT_SOCIAL_USER_SIGN_URL,
                         securityProperties.getBrowser().getSignUpUrl(),
-                        "/user/regist",
-//                        "/session/invalid",
                         "/actuator/*"
                 )
                 .permitAll()

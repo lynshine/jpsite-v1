@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mty.jpsite.security.app.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,39 +13,38 @@ import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
 /**
- * @author zhailiang
- *
+ * 配置类
  */
 @Component
 public class OpenIdAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-	
-	@Autowired
-	private AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
-	
-	@Autowired
-	private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
-	
-	@Autowired
-	private SocialUserDetailsService userDetailsService;
-	
-	@Autowired
-	private UsersConnectionRepository usersConnectionRepository;
-	
-	@Override
-	public void configure(HttpSecurity http) throws Exception {
-		
-		OpenIdAuthenticationFilter OpenIdAuthenticationFilter = new OpenIdAuthenticationFilter();
-		OpenIdAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-		OpenIdAuthenticationFilter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
-		OpenIdAuthenticationFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
-		
-		OpenIdAuthenticationProvider OpenIdAuthenticationProvider = new OpenIdAuthenticationProvider();
-		OpenIdAuthenticationProvider.setUserDetailsService(userDetailsService);
-		OpenIdAuthenticationProvider.setUsersConnectionRepository(usersConnectionRepository);
-		
-		http.authenticationProvider(OpenIdAuthenticationProvider)
-			.addFilterAfter(OpenIdAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-		
-	}
+
+    @Autowired
+    private AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
+
+    @Autowired
+    private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
+
+    @Autowired
+    private SocialUserDetailsService userDetailsService;
+
+    @Autowired
+    private UsersConnectionRepository usersConnectionRepository;
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+
+        OpenIdAuthenticationFilter OpenIdAuthenticationFilter = new OpenIdAuthenticationFilter();
+        OpenIdAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+        OpenIdAuthenticationFilter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
+        OpenIdAuthenticationFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
+
+        OpenIdAuthenticationProvider OpenIdAuthenticationProvider = new OpenIdAuthenticationProvider();
+        OpenIdAuthenticationProvider.setUserDetailsService(userDetailsService);
+        OpenIdAuthenticationProvider.setUsersConnectionRepository(usersConnectionRepository);
+
+        http.authenticationProvider(OpenIdAuthenticationProvider)
+                .addFilterAfter(OpenIdAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+    }
 
 }
