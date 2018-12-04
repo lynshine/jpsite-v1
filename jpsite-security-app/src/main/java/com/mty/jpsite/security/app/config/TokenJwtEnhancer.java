@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
 /**
- * @author zhailiang
+ * jwt token 增强處理，給token加自定義内容
  */
 public class TokenJwtEnhancer implements TokenEnhancer {
 

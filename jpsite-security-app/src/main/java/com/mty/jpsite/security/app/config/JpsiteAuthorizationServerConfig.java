@@ -13,7 +13,13 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,6 +39,10 @@ public class JpsiteAuthorizationServerConfig extends AuthorizationServerConfigur
     private SecurityProperties securityProperties;
     @Autowired
     private TokenStore jwtTokenStore;
+    @Autowired(required = false)
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+    @Autowired(required = false)
+    private TokenEnhancer jwtTokenEnhancer;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -59,5 +69,16 @@ public class JpsiteAuthorizationServerConfig extends AuthorizationServerConfigur
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(jwtTokenStore);
+        if(jwtAccessTokenConverter != null && jwtTokenEnhancer != null){
+            TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
+            List<TokenEnhancer> enhancerList = new ArrayList<TokenEnhancer>();
+            enhancerList.add(jwtTokenEnhancer);
+            enhancerList.add(jwtAccessTokenConverter);
+            enhancerChain.setTokenEnhancers(enhancerList);
+
+            endpoints.tokenEnhancer(enhancerChain)
+                    .accessTokenConverter(jwtAccessTokenConverter);
+        }
+
     }
 }

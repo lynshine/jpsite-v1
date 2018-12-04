@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
- * @author zhailiang
+ * token 存储配置
  */
 @Configuration
 public class TokenStoreConfig {
@@ -46,7 +46,7 @@ public class TokenStoreConfig {
      */
     @Configuration
     @ConditionalOnProperty(prefix = "jpsite.security.oauth2", name = "tokenStore", havingValue = "jwt", matchIfMissing = true)
-    public static class JwtConfig {
+    public static class JwtConfig  {
 
         @Autowired
         private SecurityProperties securityProperties;

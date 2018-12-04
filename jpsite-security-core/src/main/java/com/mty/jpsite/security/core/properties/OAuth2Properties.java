@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mty.jpsite.security.core.properties;
 
 /**

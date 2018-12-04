@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.mty.jpsite.security.app.common.AppSingUpUtils;
+import com.mty.jpsite.security.core.properties.SecurityProperties;
+import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +27,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.social.connect.web.ProviderSignInUtils;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -35,6 +35,7 @@ import io.swagger.annotations.ApiParam;
  */
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserSecurityController {
 
     @Autowired
@@ -43,36 +44,39 @@ public class UserSecurityController {
     /**
      * app 模式
      */
-	@Autowired
-	private AppSingUpUtils appSingUpUtils;
+    @Autowired
+    private AppSingUpUtils appSingUpUtils;
 
-/*	@Autowired
-	private SecurityProperties securityProperties;*/
+    @Autowired
+    private SecurityProperties securityProperties;
+
     @PostMapping("/regist")
     public void regist(User user, HttpServletRequest request) {
 
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
         String userId = user.getUsername();
-       //todo 瀏覽器使用，appSingUpUtils  providerSignInUtils 只能用一個
+        //todo 瀏覽器使用，appSingUpUtils  providerSignInUtils 只能用一個
         // providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
         /**
          * app注册模式
          */
-		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
+        appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
     }
 
     @GetMapping("/me")
     @ResponseBody
     public Object getCurrentUser(Authentication user, HttpServletRequest request) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
 
-//		String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
-//		
-//		Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
-//					.parseClaimsJws(token).getBody();
-//		
-//		String company = (String) claims.get("company");
-//		
-//		System.out.println(company);
+        String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
+        /**
+         * 簽名的時候默認使用utf-8， 但是驗簽的時候不是，所以這裏指定
+         */
+        Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
+                .parseClaimsJws(token).getBody();
+
+        String company = (String) claims.get("company");
+
+        System.out.println(company);
         return user.getPrincipal();
     }
 
