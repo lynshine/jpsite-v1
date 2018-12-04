@@ -1,6 +1,7 @@
 package com.mty.jpsite.security.browser.conf;
 
 import com.mty.jpsite.security.browser.authentication.SmsCodeAuthenticationConfig;
+import com.mty.jpsite.security.core.authorize.AuthorizeConfigManager;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,8 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private InvalidSessionStrategy invalidSessionStrategy;
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -75,23 +78,12 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(logoutSuccessHandler)
                 .deleteCookies("JSESSIONID")
                 .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignOutUrl(),
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        "/user/regist",
-                        "/actuator/*"
-                )
-                .permitAll()
-                .antMatchers(HttpMethod.POST,"/user/*").hasAnyRole("ADMIN")
-                .anyRequest()
-                .authenticated()
-                .and()
                 .csrf().disable();
+
+        /**
+         * 權限配置管理器
+         */
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 
     /**

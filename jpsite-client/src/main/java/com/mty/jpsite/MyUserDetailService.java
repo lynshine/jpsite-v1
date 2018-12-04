@@ -1,5 +1,5 @@
 
-package com.mty.jpsite.security.core.handler;
+package com.mty.jpsite;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,7 @@
 package com.mty.jpsite.security.app.config;
 
 import com.mty.jpsite.security.app.authentication.OpenIdAuthenticationSecurityConfig;
+import com.mty.jpsite.security.core.authorize.AuthorizeConfigManager;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private AuthenticationFailureHandler jpSiteAuthenticationFailureHandler;
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,22 +55,9 @@ class Oauth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(openIdAuthenticationSecurityConfig)
                 .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignOutUrl(),
-                        SecurityConstants.DEFAULT_SOCIAL_USER_SIGN_URL,
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        "/actuator/*"
-                )
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
                 .csrf().disable();
+
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 
 
