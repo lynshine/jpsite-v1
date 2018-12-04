@@ -10,7 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.mty.jpsite.security.app.common.AppSingUpUtils;
+//import com.mty.jpsite.security.app.common.AppSingUpUtils;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
@@ -44,8 +44,8 @@ public class UserSecurityController {
     /**
      * app 模式
      */
-    @Autowired
-    private AppSingUpUtils appSingUpUtils;
+//    @Autowired
+//    private AppSingUpUtils appSingUpUtils;
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -60,7 +60,7 @@ public class UserSecurityController {
         /**
          * app注册模式
          */
-        appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
+//        appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
     }
 
     @GetMapping("/me")
