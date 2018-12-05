@@ -14,7 +14,6 @@
         <module>jpsite-parent</module>
         <module>jpsite-server</module>
         <module>jpsite-client</module>
-        <module>jpsite-security-app</module>
     </modules>
     <packaging>pom</packaging>
 
