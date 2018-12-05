@@ -1,9 +1,14 @@
 package com.mty.jpsite.security.core.domain;
 
+import lombok.Data;
+
+import java.io.Serializable;
+
 /**
- * SocialUserInfo
+ * 社交用户信息
  */
-public class SocialUserInfo {
+@Data
+public class SocialUserInfo implements Serializable {
     /**
      * 第三方机构id
      */
@@ -19,38 +24,5 @@ public class SocialUserInfo {
     /**
      * 头像
      */
-    private String headimg;
-
-    public String getProviderId() {
-        return providerId;
-    }
-
-    public void setProviderId(String providerId) {
-        this.providerId = providerId;
-    }
-
-    public String getProviderUserId() {
-        return providerUserId;
-    }
-
-    public void setProviderUserId(String providerUserId) {
-        this.providerUserId = providerUserId;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getHeadimg() {
-        return headimg;
-    }
-
-    public void setHeadimg(String headimg) {
-        this.headimg = headimg;
-    }
-
+    private String headImg;
 }

@@ -1,9 +1,11 @@
 package com.mty.jpsite.security.core.properties;
 
+import lombok.Data;
+
 /**
  * 图片验证码配置项
- * Created by jiangpeng on 2018/11/9.
  */
+@Data
 public class ImageCodeProperties extends SmsCodeProperties {
     /**
      * 图片宽
@@ -16,21 +18,5 @@ public class ImageCodeProperties extends SmsCodeProperties {
 
     public ImageCodeProperties() {
         setLength(4);
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 }

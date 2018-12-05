@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.mty.jpsite.security.core.authorize;
 
 import com.mty.jpsite.security.core.properties.SecurityConstants;
@@ -13,12 +10,10 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.stereotype.Component;
 
 /**
- * 核心模块的授权配置提供器，安全模块涉及的url的授权配置在这里。
- *
- * @author zhailiang
+ * 核心模块的权限授权配置提供器，安全模块涉及的url的授权配置在这里。
  */
 @Component
-@Order(Integer.MIN_VALUE)
+@Order(Integer.MIN_VALUE)  // 设置执行顺序
 public class JpsiteAuthorizeConfigProvider implements AuthorizeConfigProvider {
 
     @Autowired

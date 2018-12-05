@@ -14,7 +14,7 @@ public interface ValidateCodeRepository {
      *
      * @param request
      * @param code
-     * @param validateCodeType
+     * @param validateCodeType 校验码类型
      */
     void save(ServletWebRequest request, ValidateCode code, ValidateCodeType validateCodeType);
 
@@ -22,7 +22,7 @@ public interface ValidateCodeRepository {
      * 获取验证码
      *
      * @param request
-     * @param validateCodeType
+     * @param validateCodeType 校验码类型
      * @return
      */
     ValidateCode get(ServletWebRequest request, ValidateCodeType validateCodeType);
@@ -31,7 +31,7 @@ public interface ValidateCodeRepository {
      * 移除验证码
      *
      * @param request
-     * @param validateCodeType
+     * @param validateCodeType 校验码类型
      */
     void remove(ServletWebRequest request, ValidateCodeType validateCodeType);
 

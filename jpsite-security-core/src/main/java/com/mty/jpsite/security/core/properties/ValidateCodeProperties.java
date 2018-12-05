@@ -1,8 +1,11 @@
 package com.mty.jpsite.security.core.properties;
 
+import lombok.Data;
+
 /**
- * 验证码配置
+ * 验证码配置属性
  */
+@Data
 public class ValidateCodeProperties {
     /**
      * 图片验证码配置
@@ -12,20 +15,4 @@ public class ValidateCodeProperties {
      * 短信验证码配置
      */
     private SmsCodeProperties sms = new SmsCodeProperties();
-
-    public ImageCodeProperties getImage() {
-        return image;
-    }
-
-    public void setImage(ImageCodeProperties image) {
-        this.image = image;
-    }
-
-    public SmsCodeProperties getSms() {
-        return sms;
-    }
-
-    public void setSms(SmsCodeProperties sms) {
-        this.sms = sms;
-    }
 }

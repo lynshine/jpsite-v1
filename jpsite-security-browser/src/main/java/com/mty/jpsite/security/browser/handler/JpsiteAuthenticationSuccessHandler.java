@@ -1,7 +1,7 @@
 package com.mty.jpsite.security.browser.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mty.jpsite.security.core.enums.LoginType;
+import com.mty.jpsite.security.core.enums.LoginResponseType;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,10 +35,10 @@ public class JpsiteAuthenticationSuccessHandler extends SavedRequestAwareAuthent
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        logger.info("登录成功--loginType: " + securityProperties.getBrowser().getLoginType());
+        logger.info("登录成功--LoginResponseType: " + securityProperties.getBrowser().getLoginResponseType());
 
         /**判断登录请求类型*/
-        if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
+        if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginResponseType())) {
             httpServletResponse.setContentType("application/json;charset=UTF-8");
             /**将authentication认证信息转换为json格式的字符串写到response里面去*/
             httpServletResponse.getWriter().write(objectMapper.writeValueAsString(authentication));

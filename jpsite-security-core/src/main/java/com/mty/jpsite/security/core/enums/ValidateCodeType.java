@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.mty.jpsite.security.core.enums;
 
 import com.mty.jpsite.security.core.properties.SecurityConstants;
@@ -10,7 +7,7 @@ import com.mty.jpsite.security.core.properties.SecurityConstants;
  */
 public enum ValidateCodeType {
     /**
-     * 短信验证码
+     * 短信验证码 smsCode
      */
     SMS {
         @Override
@@ -19,7 +16,7 @@ public enum ValidateCodeType {
         }
     },
     /**
-     * 图片验证码
+     * 图片验证码 imageCode
      */
     IMAGE {
         @Override

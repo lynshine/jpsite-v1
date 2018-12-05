@@ -3,7 +3,7 @@ package com.mty.jpsite.security.core.enums;
 /**
  * 登录类型
  */
-public enum LoginType {
+public enum LoginResponseType {
     /**
      * 重定向
      */

@@ -1,17 +1,23 @@
 package com.mty.jpsite.security.core.domain;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * 验证码
- * Created by jiangpeng on 2018/11/9.
  */
+@Data
 public class ValidateCode implements Serializable {
-    private static final long serialVersionUID = 1588203828504660915L;
-
-    private String code;  // 验证码
-    private LocalDateTime expireTime;   //过期时间
+    /**
+     * 验证码
+     */
+    private String code;
+    /**
+     * 过期时间
+     */
+    private LocalDateTime expireTime;
 
     public ValidateCode(String code, int expireIn) {
         this.code = code;
@@ -23,22 +29,11 @@ public class ValidateCode implements Serializable {
         this.expireTime = expireTime;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public LocalDateTime getExpireTime() {
-        return expireTime;
-    }
-
-    public void setExpireTime(LocalDateTime expireTime) {
-        this.expireTime = expireTime;
-    }
-
+    /**
+     * 判断是否过期
+     *
+     * @return Boolean true过期
+     */
     public Boolean isExpired() {
         return LocalDateTime.now().isAfter(expireTime);
     }

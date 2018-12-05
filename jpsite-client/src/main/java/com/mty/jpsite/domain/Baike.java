@@ -13,7 +13,7 @@ import java.util.List;
 @ApiModel(value = "baike", description = "baike模型")
 public class Baike {
     private String id;
-    @ApiModelProperty(value = "描述", dataType = "com.mty.jpsite.enums.LoginType")  // 字段api说明, 用枚举测试一下
+    @ApiModelProperty(value = "描述", dataType = "com.mty.jpsite.enums.LoginResponseType")  // 字段api说明, 用枚举测试一下
     private String desc;
     private List<String> tag = new ArrayList<String>();
     private Date createDate = null;

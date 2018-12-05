@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.mty.jpsite.security.core.authorize;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 默认的授权配置管理器
- *
- * @author zhailiang
+ * 默认的权限授权配置管理器
  */
 @Component
 public class JpsiteAuthorizeConfigManager implements AuthorizeConfigManager {
@@ -21,25 +16,28 @@ public class JpsiteAuthorizeConfigManager implements AuthorizeConfigManager {
     @Autowired
     private List<AuthorizeConfigProvider> authorizeConfigProviders;
 
-    /* (non-Javadoc)
-     * @see com.imooc.security.core.authorize.AuthorizeConfigManager#config(org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.ExpressionInterceptUrlRegistry)
-     */
     @Override
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+        /**是否有已经存在的配置*/
         boolean existAnyRequestConfig = false;
+        /**已经存在的配置名*/
         String existAnyRequestConfigName = null;
 
         for (AuthorizeConfigProvider authorizeConfigProvider : authorizeConfigProviders) {
+            /**调用 {@link AuthorizeConfigProvider} 实现子类的config*/
             boolean currentIsAnyRequestConfig = authorizeConfigProvider.config(config);
+            /**再次进入则直接throw RuntimeException*/
             if (existAnyRequestConfig && currentIsAnyRequestConfig) {
                 throw new RuntimeException("重复的anyRequest配置:" + existAnyRequestConfigName + ","
                         + authorizeConfigProvider.getClass().getSimpleName());
-            } else if (currentIsAnyRequestConfig) {
+            } else if (currentIsAnyRequestConfig) { /**如果有已经有针对anyRequest的配置，则把existAnyRequestConfig设为true*/
                 existAnyRequestConfig = true;
                 existAnyRequestConfigName = authorizeConfigProvider.getClass().getSimpleName();
             }
         }
-        //todo 可能要注釋,因为可能会覆盖掉别的地方的配置，它最后调
+        /**
+         * 最后剩余的anyRequest都要认证
+         */
         if (!existAnyRequestConfig) {
             config.anyRequest().authenticated();
         }
