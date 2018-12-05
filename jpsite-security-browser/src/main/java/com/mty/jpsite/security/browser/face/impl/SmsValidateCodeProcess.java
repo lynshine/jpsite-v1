@@ -13,6 +13,9 @@ import org.springframework.web.context.request.ServletWebRequest;
  */
 @Component("smsValidateCodeProcess")
 public class SmsValidateCodeProcess extends AbstractValidateCodeProcessor<ValidateCode> {
+    /**
+     * 短信验证码发送器
+     */
     @Autowired
     private SmsCodeSender smsCodeSender;
 

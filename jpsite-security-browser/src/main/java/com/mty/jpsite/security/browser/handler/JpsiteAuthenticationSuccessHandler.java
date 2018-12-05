@@ -35,7 +35,7 @@ public class JpsiteAuthenticationSuccessHandler extends SavedRequestAwareAuthent
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        logger.info("登录成功--LoginResponseType: " + securityProperties.getBrowser().getLoginResponseType());
+        logger.info("====>登录成功--LoginResponseType: " + securityProperties.getBrowser().getLoginResponseType());
 
         /**判断登录请求类型*/
         if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginResponseType())) {

@@ -37,7 +37,7 @@ class JpsiteAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureH
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException) throws IOException, ServletException {
-        logger.info("登录失败--loginType: {}", securityProperties.getBrowser().getLoginResponseType());
+        logger.info("====>登录失败--loginType: {}", securityProperties.getBrowser().getLoginResponseType());
 
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         /**判断登录请求类型*/

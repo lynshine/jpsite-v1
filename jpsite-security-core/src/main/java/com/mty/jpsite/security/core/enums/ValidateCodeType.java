@@ -3,7 +3,7 @@ package com.mty.jpsite.security.core.enums;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 
 /**
- * 校验码类型
+ * 验证码类型
  */
 public enum ValidateCodeType {
     /**
