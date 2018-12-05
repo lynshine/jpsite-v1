@@ -9,19 +9,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * QQ自动登录配置
+ * QQ登录配置
  */
 @Configuration
 @ConditionalOnProperty(prefix = "jpsite.security.social.qq", name = "app-id")
 public class QQAutoConfig {
-
     @Autowired
     private SecurityProperties securityProperties;
 
     /**
      * 实例化 QQConnectionFactory 连接工厂
      *
-     * @return
+     * @return QQConnectionFactory
      */
     @Bean
     public QQConnectionFactory qqConnectionFactory() {

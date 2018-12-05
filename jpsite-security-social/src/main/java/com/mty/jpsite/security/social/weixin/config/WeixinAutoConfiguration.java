@@ -25,6 +25,11 @@ public class WeixinAutoConfiguration extends SocialConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
+    /**
+     * 实例化 WeixinConnectionFactory 连接工厂
+     *
+     * @return WeixinConnectionFactory
+     */
     @Bean
     public WeixinConnectionFactory weixinConnectionFactory() {
         WeixinProperties weixinConfig = securityProperties.getSocial().getWeixin();
