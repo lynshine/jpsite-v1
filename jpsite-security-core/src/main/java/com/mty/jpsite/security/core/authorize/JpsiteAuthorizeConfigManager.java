@@ -39,7 +39,7 @@ public class JpsiteAuthorizeConfigManager implements AuthorizeConfigManager {
                 existAnyRequestConfigName = authorizeConfigProvider.getClass().getSimpleName();
             }
         }
-
+        //todo 可能要注釋,因为可能会覆盖掉别的地方的配置，它最后调
         if (!existAnyRequestConfig) {
             config.anyRequest().authenticated();
         }
