@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.social.qq;
+package com.mty.jpsite.security.social.common;
 
 import com.mty.jpsite.security.core.config.JpSpringSocialConfigurer;
 import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
@@ -47,17 +47,30 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     @Autowired(required = false)
     private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
 
+    /**
+     * 表UsersConnection 的 Repository
+     *
+     * @param connectionFactoryLocator
+     * @return
+     */
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
-        // Encryptors加密方式
+        /** Encryptors加密方式*/
         JdbcUsersConnectionRepository usersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 //        usersConnectionRepository.setTablePrefix("fe");
         if (connectionSignUp != null) {
+            /**设置自动注册策略*/
             usersConnectionRepository.setConnectionSignUp(connectionSignUp);
         }
         return usersConnectionRepository;
     }
 
+    /**
+     * 查看社交绑定情况
+     *
+     * @param connectionFactoryLocator
+     * @return
+     */
     @Bean
     public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator) {
         // todo 數據源暫時寫死
@@ -74,7 +87,7 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     public SpringSocialConfigurer jpSpringSocialConfigurer() {
         String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
         JpSpringSocialConfigurer springSocialConfigurer = new JpSpringSocialConfigurer(filterProcessesUrl);
-        // 注册页
+        /** 注册页**/
         springSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
         // todo 不知道为什么注解注入没有用
         springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);

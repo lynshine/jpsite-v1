@@ -54,7 +54,7 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        formAuthenticationConfig.configure(http);
+        formAuthenticationConfig.configure(http);  //表单登录验证
 
         http.apply(validateCodeSecurityConfig)   // 验证码
                 .and()

@@ -56,7 +56,7 @@ public class UserSecurityController {
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
         String userId = user.getUsername();
         //todo 瀏覽器使用，appSingUpUtils  providerSignInUtils 只能用一個
-        // providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+         providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
         /**
          * app注册模式
          */

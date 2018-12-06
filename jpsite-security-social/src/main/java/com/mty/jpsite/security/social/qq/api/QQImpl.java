@@ -42,7 +42,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
         String url = String.format(URL_GET_USERINFO, appId, openId);
         String result = getRestTemplate().getForObject(url, String.class);
 
-        logger.info("====>getUserInfo by QQUserInfo: {}", result);
+        logger.info("====>getUserInfo() by QQUserInfo: {}", result);
 
         QQUserInfo userInfo = null;
         try {

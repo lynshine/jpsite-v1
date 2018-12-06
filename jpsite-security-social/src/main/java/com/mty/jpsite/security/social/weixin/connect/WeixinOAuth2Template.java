@@ -39,9 +39,6 @@ public class WeixinOAuth2Template extends OAuth2Template {
         this.accessTokenUrl = accessTokenUrl;
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.social.oauth2.OAuth2Template#exchangeForAccess(java.lang.String, java.lang.String, org.springframework.util.MultiValueMap)
-     */
     @Override
     public AccessGrant exchangeForAccess(String authorizationCode, String redirectUri,
                                          MultiValueMap<String, String> parameters) {
@@ -57,8 +54,8 @@ public class WeixinOAuth2Template extends OAuth2Template {
         return getAccessToken(accessTokenRequestUrl);
     }
 
+    @Override
     public AccessGrant refreshAccess(String refreshToken, MultiValueMap<String, String> additionalParameters) {
-
         StringBuilder refreshTokenUrl = new StringBuilder(REFRESH_TOKEN_URL);
 
         refreshTokenUrl.append("?appid=" + clientId);
@@ -68,13 +65,9 @@ public class WeixinOAuth2Template extends OAuth2Template {
         return getAccessToken(refreshTokenUrl);
     }
 
-    @SuppressWarnings("unchecked")
     private AccessGrant getAccessToken(StringBuilder accessTokenRequestUrl) {
-
         logger.info("获取access_token, 请求URL: " + accessTokenRequestUrl.toString());
-
         String response = getRestTemplate().getForObject(accessTokenRequestUrl.toString(), String.class);
-
         logger.info("获取access_token, 响应内容: " + response);
 
         Map<String, Object> result = null;
@@ -105,12 +98,14 @@ public class WeixinOAuth2Template extends OAuth2Template {
     /**
      * 构建获取授权码的请求。也就是引导用户跳转到微信的地址。
      */
+    @Override
     public String buildAuthenticateUrl(OAuth2Parameters parameters) {
         String url = super.buildAuthenticateUrl(parameters);
         url = url + "&appid=" + clientId + "&scope=snsapi_login";
         return url;
     }
 
+    @Override
     public String buildAuthorizeUrl(OAuth2Parameters parameters) {
         return buildAuthenticateUrl(parameters);
     }
@@ -118,6 +113,7 @@ public class WeixinOAuth2Template extends OAuth2Template {
     /**
      * 微信返回的contentType是html/text，添加相应的HttpMessageConverter来处理。
      */
+    @Override
     protected RestTemplate createRestTemplate() {
         RestTemplate restTemplate = super.createRestTemplate();
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter(Charset.forName("UTF-8")));

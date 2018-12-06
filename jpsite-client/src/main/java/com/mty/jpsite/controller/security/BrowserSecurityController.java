@@ -61,14 +61,14 @@ public class BrowserSecurityController {
         if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();
             logger.info("====>引发跳转的请求是:" + targetUrl);
-            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
+//            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
+//                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
+//            }
+//            else if (StringUtils.endsWithIgnoreCase(targetUrl, ".json")) {
+//                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
+//            } else {
                 redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
-            }
-            else if (StringUtils.endsWithIgnoreCase(targetUrl, ".json")) {
-                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
-            } else {
-                redirectStrategy.sendRedirect(request, response, targetUrl);
-            }
+//            }
         }
 
         return new SecurityResponse("====>访问的服务需要身份认证，请引导用户到登录页");
