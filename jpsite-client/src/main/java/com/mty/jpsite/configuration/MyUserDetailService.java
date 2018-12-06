@@ -1,5 +1,5 @@
 
-package com.mty.jpsite;
+package com.mty.jpsite.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,11 +1,11 @@
-package com.mty.jpsite;
+package com.mty.jpsite.configuration;
 
 import com.mty.jpsite.security.core.authorize.AuthorizeConfigManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 
 /**
- * Created by jiangpeng on 2018/12/4.
+ * 自定义权限拦截配置
  */
 public class ClientAuthorizeConfigProvider implements AuthorizeConfigManager {
     /**
