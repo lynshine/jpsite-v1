@@ -14,7 +14,8 @@ public class ClientAuthorizeConfigProvider implements AuthorizeConfigManager {
     @Override
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
         config.antMatchers("/user/regist", "/actuator/*")
-                .hasRole("ADMIN");
+                .hasRole("ADMIN")
+                .anyRequest().permitAll();
 
     }
 }

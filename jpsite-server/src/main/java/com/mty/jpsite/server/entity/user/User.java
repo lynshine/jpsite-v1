@@ -26,7 +26,6 @@ import lombok.experimental.Accessors;
 @TableName("user")
 @ApiModel(value="User对象", description="用户表")
 public class User extends Model<User> {
-
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键")
@@ -55,6 +54,9 @@ public class User extends Model<User> {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "openId")
+    private String  openId;
 
 
     public static final String ID = "id";

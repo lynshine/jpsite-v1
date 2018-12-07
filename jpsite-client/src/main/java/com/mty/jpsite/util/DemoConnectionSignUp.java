@@ -26,9 +26,11 @@ public class DemoConnectionSignUp implements ConnectionSignUp {
         User user = new User();
         user.setName(connection.getDisplayName());
         user.setImageUrl(connection.getImageUrl());
+        user.setOpenId(connection.createData().getProviderUserId());
+
         userService.save(user);
         QueryWrapper query = new QueryWrapper();
-        query.eq("image_url", connection.getImageUrl());
+        query.eq("open_id", connection.createData().getProviderUserId());
         return userService.getOne(query).getId().toString();
     }
 
