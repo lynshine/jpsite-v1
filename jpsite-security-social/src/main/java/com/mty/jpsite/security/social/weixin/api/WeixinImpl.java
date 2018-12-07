@@ -1,11 +1,9 @@
-/**
- *
- */
 package com.mty.jpsite.security.social.weixin.api;
 
 import java.nio.charset.Charset;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -17,11 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Weixin API调用模板， scope为Request的Spring bean, 根据当前用户的accessToken创建。
  */
+@Slf4j
 public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
-
-    /**
-     *
-     */
     private ObjectMapper objectMapper = new ObjectMapper();
     /**
      * 获取用户信息的url
@@ -36,7 +31,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     }
 
     /**
-     * 默认注册的StringHttpMessageConverter字符集为ISO-8859-1，而微信返回的是UTF-8的，所以覆盖了原来的方法。
+     * 默认注册的StringHttpMessageConverter字符集为ISO-8859-1，而微信返回的是UTF-8的，所以覆盖原来的方法。
      */
     protected List<HttpMessageConverter<?>> getMessageConverters() {
         List<HttpMessageConverter<?>> messageConverters = super.getMessageConverters();
@@ -52,6 +47,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     public WeixinUserInfo getUserInfo(String openId) {
         String url = URL_GET_USER_INFO + openId;
         String response = getRestTemplate().getForObject(url, String.class);
+        log.info("====>获取微信用户信息：{}", response);
         if (StringUtils.contains(response, "errcode")) {
             return null;
         }

@@ -2,6 +2,9 @@ package com.mty.jpsite.security.social.weixin.connect;
 
 import com.mty.jpsite.security.social.weixin.api.Weixin;
 import com.mty.jpsite.security.social.weixin.api.WeixinUserInfo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
@@ -9,16 +12,10 @@ import org.springframework.social.connect.UserProfile;
 /**
  * 微信 api适配器，将微信 api的数据模型转为spring social的标准模型。
  */
+@AllArgsConstructor
+@NoArgsConstructor
 public class WeixinAdapter implements ApiAdapter<Weixin> {
-
     private String openId;
-
-    public WeixinAdapter() {
-    }
-
-    public WeixinAdapter(String openId) {
-        this.openId = openId;
-    }
 
     /**
      * @param api

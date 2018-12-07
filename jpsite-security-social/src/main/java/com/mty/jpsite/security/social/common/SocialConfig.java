@@ -1,5 +1,7 @@
-package com.mty.jpsite.security.social.qq.conf;
+package com.mty.jpsite.security.social.common;
 
+import com.mty.jpsite.security.core.config.JpSpringSocialConfigurer;
+import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.SpringSocialConfigurer;
+
 import javax.sql.DataSource;
 
 /**
@@ -41,17 +44,33 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
+    /**
+     * 表UsersConnection 的 Repository
+     *
+     * @param connectionFactoryLocator
+     * @return
+     */
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
-        // Encryptors加密方式
+        /** Encryptors加密方式*/
         JdbcUsersConnectionRepository usersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 //        usersConnectionRepository.setTablePrefix("fe");
-        if(connectionSignUp != null){
+        if (connectionSignUp != null) {
+            /**设置自动注册策略*/
             usersConnectionRepository.setConnectionSignUp(connectionSignUp);
         }
         return usersConnectionRepository;
     }
 
+    /**
+     * 查看社交绑定情况
+     *
+     * @param connectionFactoryLocator
+     * @return
+     */
     @Bean
     public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator) {
         // todo 數據源暫時寫死
@@ -62,15 +81,18 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     /**
      * 社交登录配置类，供浏览器或app模块引入设计登录配置用。
      *
-     * @return
+     * @return BeanName jpSpringSocialConfigurer
      */
     @Bean
     public SpringSocialConfigurer jpSpringSocialConfigurer() {
         String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();
-        JpSpringSocialConfigurer jpSpringSocialConfigurer = new JpSpringSocialConfigurer(filterProcessesUrl);
-        // 注册页
-        jpSpringSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
-        return jpSpringSocialConfigurer;
+        JpSpringSocialConfigurer springSocialConfigurer = new JpSpringSocialConfigurer(filterProcessesUrl);
+        /** 注册页**/
+        springSocialConfigurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        // todo 不知道为什么注解注入没有用
+        springSocialConfigurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
+
+        return springSocialConfigurer;
     }
 
     @Override

@@ -8,7 +8,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.TokenStrategy;
 
 /**
- * QQ interface 的实现
+ * QQImpl extends {@link AbstractOAuth2ApiBinding} implements {@link QQ}
  */
 public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
     private Logger logger = LoggerFactory.getLogger(QQImpl.class);
@@ -21,28 +21,28 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public QQImpl(String accessToken, String appId) {
-        super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);  //作为查询参数挂在请求上
+        /**作为查询参数挂在请求上*/
+        super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
         this.appId = appId;
-        /**
-         * 请求发送获取openId
-         */
         String url = String.format(URL_GET_OPENID, accessToken);
+        /**请求发送获取openId*/
         String result = getRestTemplate().getForObject(url, String.class);
-
+        /**字符串截取获取openid*/
         this.openId = StringUtils.substringBetween(result, "\"openid\":\"", "\"}");
     }
 
     /**
-     * 获取QQ 返回的userInfo
+     * 获取QQUserInfo
      *
-     * @return
+     * @return QQUserInfo
      */
     @Override
     public QQUserInfo getUserInfo() {
+        /**拼接url*/
         String url = String.format(URL_GET_USERINFO, appId, openId);
         String result = getRestTemplate().getForObject(url, String.class);
 
-        logger.info("====>getUserInfo {}", result);
+        logger.info("====>getUserInfo() by QQUserInfo: {}", result);
 
         QQUserInfo userInfo = null;
         try {
@@ -50,7 +50,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
             userInfo.setOpenId(openId);
             return userInfo;
         } catch (Exception e) {
-            throw new RuntimeException("====>获取用户信息失败{}", e);
+            throw new RuntimeException("====>获取用户信息失败：{}", e);
         }
     }
 }

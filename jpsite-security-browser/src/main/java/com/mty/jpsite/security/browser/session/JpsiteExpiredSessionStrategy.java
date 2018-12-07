@@ -9,8 +9,6 @@ import java.io.IOException;
 
 /**
  * 并发登录导致session失效时，默认的处理策略
- *
- * @author zhailiang
  */
 public class JpsiteExpiredSessionStrategy extends AbstractSessionStrategy implements SessionInformationExpiredStrategy {
 
@@ -18,16 +16,22 @@ public class JpsiteExpiredSessionStrategy extends AbstractSessionStrategy implem
         super(securityPropertie);
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.security.web.session.SessionInformationExpiredStrategy#onExpiredSessionDetected(org.springframework.security.web.session.SessionInformationExpiredEvent)
+    /**
+     * 检测到session过期时
+     *
+     * @param event
+     * @throws IOException
+     * @throws ServletException
      */
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
         onSessionInvalid(event.getRequest(), event.getResponse());
     }
 
-    /* (non-Javadoc)
-     * @see com.imooc.security.browser.session.AbstractSessionStrategy#isConcurrency()
+    /**
+     * session失效是并发登录导致的
+     *
+     * @return true
      */
     @Override
     protected boolean isConcurrency() {

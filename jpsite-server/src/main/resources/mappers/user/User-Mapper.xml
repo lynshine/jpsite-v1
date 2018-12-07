@@ -9,19 +9,17 @@
     <resultMap id="BaseResultMap" type="com.mty.jpsite.server.entity.user.User">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <result column="login_name" property="loginName" />
-        <result column="login_password" property="loginPassword" />
-        <result column="create_at" property="createAt" />
-        <result column="update_at" property="updateAt" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="is_admin" property="admin" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, login_name, login_password, create_at, update_at
+        id, name, phone, email, is_admin, status, create_time, update_time
     </sql>
-
-    <select id="selectPageVo" resultType="com.mty.jpsite.server.entity.user.User">
-      SELECT id,name FROM user WHERE `name`=#{name}
-    </select>
 
 </mapper>
