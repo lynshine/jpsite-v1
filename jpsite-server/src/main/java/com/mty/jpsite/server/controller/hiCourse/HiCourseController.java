@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
  * @author jiangpeng
  * @since 2018-12-10
  */
-@Api(description = "课程前端控制器")
+@Api(description = "课程")
 @RestController
 @RequestMapping("/hiCourse")
 public class HiCourseController {
