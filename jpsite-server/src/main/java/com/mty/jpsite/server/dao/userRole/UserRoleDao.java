@@ -1,4 +1,4 @@
-package com.mty.jpsite.server.dao.user_role;
+package com.mty.jpsite.server.dao.userRole;
 
 import com.mty.jpsite.server.entity.userRole.UserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

@@ -1,8 +1,8 @@
-package com.mty.jpsite.server.serviceImpl.role_access;
+package com.mty.jpsite.server.serviceImpl.roleAccess;
 
 import com.mty.jpsite.server.entity.roleAccess.RoleAccess;
-import com.mty.jpsite.server.dao.role_access.RoleAccessDao;
-import com.mty.jpsite.server.service.role_access.RoleAccessService;
+import com.mty.jpsite.server.dao.roleAccess.RoleAccessDao;
+import com.mty.jpsite.server.service.roleAccess.RoleAccessService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

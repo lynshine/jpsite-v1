@@ -1,4 +1,4 @@
-package com.mty.jpsite.server.dao.role_access;
+package com.mty.jpsite.server.dao.roleAccess;
 
 import com.mty.jpsite.server.entity.roleAccess.RoleAccess;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

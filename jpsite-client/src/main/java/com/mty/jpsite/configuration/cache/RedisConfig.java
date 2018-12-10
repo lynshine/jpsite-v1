@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 @Conditional(CacheConfig.RedisCondtion.class)   // 通过RedisCondtion判断是否实例化bean
 @Configuration
 public class RedisConfig {
-    @Bean("strKeyRedisTemplate")
+    @Bean(name = "strKeyRedisTemplate")
     public RedisTemplate<Object, Object> strKeyRedisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
         RedisTemplate<Object, Object> template = new RedisTemplate<Object, Object>();
         template.setConnectionFactory(redisConnectionFactory);
@@ -26,7 +26,7 @@ public class RedisConfig {
         return template;
     }
 
-    @Bean("jsonRedisTemplate")
+    @Bean(name = "jsonRedisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
         RedisTemplate<Object, Object> template = new RedisTemplate<Object, Object>();
         template.setConnectionFactory(redisConnectionFactory);

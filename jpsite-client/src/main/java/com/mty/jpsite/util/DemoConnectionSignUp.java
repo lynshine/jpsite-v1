@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mty.jpsite.server.entity.user.User;
 import com.mty.jpsite.server.entity.userRole.UserRole;
 import com.mty.jpsite.server.service.user.UserService;
-import com.mty.jpsite.server.service.user_role.UserRoleService;
+import com.mty.jpsite.server.service.userRole.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;

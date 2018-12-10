@@ -1,4 +1,4 @@
-package com.mty.jpsite.server.service.role_access;
+package com.mty.jpsite.server.service.roleAccess;
 
 import com.mty.jpsite.server.entity.roleAccess.RoleAccess;
 import com.baomidou.mybatisplus.extension.service.IService;

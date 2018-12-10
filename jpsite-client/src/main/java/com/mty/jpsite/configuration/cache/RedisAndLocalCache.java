@@ -53,14 +53,13 @@ public class RedisAndLocalCache implements Cache {
 
     @Override
     public <T> T get(Object key, Class<T> type) {
-
         return redisCache.get(key, type);
     }
 
-    @Override
-    public <T> T get(Object key, Callable<T> valueLoader) {
-        return redisCache.get(key, valueLoader);
+    public <T> T get(Object o, Callable<T> callable) {
+        return redisCache.get(o, callable);
     }
+
 
     @Override
     public void put(Object key, Object value) {

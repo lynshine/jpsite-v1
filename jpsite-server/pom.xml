@@ -91,6 +91,21 @@
             <version>4.0.4.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>2.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>2.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.9.5</version>
+        </dependency>
     </dependencies>
 
 
@@ -106,7 +121,7 @@
                 </configuration>
             </plugin>
             <!-- 这样打出来的包ToolHelper-0.0.1-SNAPSHOT.jar和original-ToolHelper-0.0.1-SNAPSHOT.jar
-             original-是原始包就是不含第三方jar的，另一个是含第三方jar的-->
+             original-是原始包就是不含第三方jar的，另一个是含第三方jar的
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -127,7 +142,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
         <resources>
             <resource>

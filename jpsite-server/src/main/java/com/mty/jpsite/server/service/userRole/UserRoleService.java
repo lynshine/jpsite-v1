@@ -1,4 +1,4 @@
-package com.mty.jpsite.server.service.user_role;
+package com.mty.jpsite.server.service.userRole;
 
 import com.mty.jpsite.server.entity.userRole.UserRole;
 import com.baomidou.mybatisplus.extension.service.IService;

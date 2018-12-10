@@ -7,7 +7,7 @@ import com.mty.jpsite.server.entity.user.User;
 import com.mty.jpsite.server.entity.userRole.UserRole;
 import com.mty.jpsite.server.service.role.RoleService;
 import com.mty.jpsite.server.service.user.UserService;
-import com.mty.jpsite.server.service.user_role.UserRoleService;
+import com.mty.jpsite.server.service.userRole.UserRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,6 @@ import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;

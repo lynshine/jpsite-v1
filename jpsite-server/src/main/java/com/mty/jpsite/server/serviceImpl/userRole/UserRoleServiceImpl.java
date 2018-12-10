@@ -1,8 +1,8 @@
-package com.mty.jpsite.server.serviceImpl.user_role;
+package com.mty.jpsite.server.serviceImpl.userRole;
 
 import com.mty.jpsite.server.entity.userRole.UserRole;
-import com.mty.jpsite.server.dao.user_role.UserRoleDao;
-import com.mty.jpsite.server.service.user_role.UserRoleService;
+import com.mty.jpsite.server.dao.userRole.UserRoleDao;
+import com.mty.jpsite.server.service.userRole.UserRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
