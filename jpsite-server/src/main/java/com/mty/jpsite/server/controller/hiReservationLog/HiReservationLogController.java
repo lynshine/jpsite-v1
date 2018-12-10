@@ -8,6 +8,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,13 +51,9 @@ public class HiReservationLogController {
     @ApiOperation(value = "/my", notes = "查询我的预约记录")
     @GetMapping("/my")
     public List<HiReservationLog> findMe(HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        WebAuthenticationDetails webAuthenticationDetails = (WebAuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-//
-//        Object attribute = session.getAttribute(webAuthenticationDetails.getSessionId());
-
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("user_id", "s");
+        queryWrapper.eq("user_id", userDetails.getUsername());
         return hiReservationLogService.list(queryWrapper);
     }
 }
