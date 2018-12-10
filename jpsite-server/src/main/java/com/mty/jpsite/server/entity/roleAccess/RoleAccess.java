@@ -1,16 +1,17 @@
-package com.mty.jpsite.server.entity.role_access;
+package com.mty.jpsite.server.entity.roleAccess;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -25,8 +26,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("role_access")
-@ApiModel(value="RoleAccess对象", description="角色权限表 
-")
+@ApiModel(value="RoleAccess对象", description="角色权限表")
 public class RoleAccess extends Model<RoleAccess> {
 
     private static final long serialVersionUID = 1L;
@@ -62,5 +62,4 @@ public class RoleAccess extends Model<RoleAccess> {
     protected Serializable pkVal() {
         return this.id;
     }
-
 }

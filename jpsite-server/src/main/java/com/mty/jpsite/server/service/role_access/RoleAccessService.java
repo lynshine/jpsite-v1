@@ -1,6 +1,6 @@
 package com.mty.jpsite.server.service.role_access;
 
-import com.mty.jpsite.server.entity.role_access.RoleAccess;
+import com.mty.jpsite.server.entity.roleAccess.RoleAccess;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

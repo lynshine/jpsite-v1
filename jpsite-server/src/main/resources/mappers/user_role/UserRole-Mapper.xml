@@ -6,7 +6,7 @@
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.mty.jpsite.server.entity.user_role.UserRole">
+    <resultMap id="BaseResultMap" type="com.mty.jpsite.server.entity.userRole.UserRole">
         <id column="id" property="id" />
         <result column="uid" property="uid" />
         <result column="role_id" property="roleId" />

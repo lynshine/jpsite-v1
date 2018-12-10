@@ -1,6 +1,6 @@
 package com.mty.jpsite.server.service.user_role;
 
-import com.mty.jpsite.server.entity.user_role.UserRole;
+import com.mty.jpsite.server.entity.userRole.UserRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

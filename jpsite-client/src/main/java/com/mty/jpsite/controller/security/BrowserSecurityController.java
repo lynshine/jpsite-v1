@@ -1,18 +1,17 @@
 package com.mty.jpsite.controller.security;
 
+import com.mty.jpsite.security.core.controller.SocialController;
 import com.mty.jpsite.security.core.domain.SecurityResponse;
 import com.mty.jpsite.security.core.domain.SocialUserInfo;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -31,7 +30,7 @@ import java.io.IOException;
 
 @Api(description = "浏览器安全控制类")
 @RestController
-public class BrowserSecurityController {
+public class BrowserSecurityController extends SocialController {
     private Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * 原请求内容的缓存及恢复
@@ -101,16 +100,7 @@ public class BrowserSecurityController {
          * 获取connectionFactory，QQ则是QQConnectionFactory，微信是WeixinConnectionFactory
          */
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
-        SocialUserInfo userInfo = new SocialUserInfo();
-        /**第三方应用id*/
-        userInfo.setProviderId(connection.getKey().getProviderId());
-        /**第三方用户id*/
-        userInfo.setProviderUserId(connection.getKey().getProviderUserId());
-        /**昵称*/
-        userInfo.setNickname(connection.getDisplayName());
-        /**头像图片url*/
-        userInfo.setHeadImg(connection.getImageUrl());
-        return userInfo;
+        return buildSocialUserInfo(connection);
     }
 
     @ApiOperation(value = "/session/invalid",

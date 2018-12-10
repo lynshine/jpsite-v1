@@ -34,7 +34,8 @@ public class User extends Model<User> {
 
     @ApiModelProperty(value = "用户名")
     private String name;
-
+    @ApiModelProperty(value = "密码")
+    private String password;
     @ApiModelProperty(value = "手机号码")
     private String phone;
     @ApiModelProperty(value = "头像图片地址")
