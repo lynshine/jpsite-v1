@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.io.File;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by jiangpeng on 2018/11/29.
@@ -47,8 +49,10 @@ public class MysqlGenerator {
      * </p>
      */
     public static void main(String[] args) {
-        start("user");
-        start("role");
+        start("hi_user_vip");
+        start("hi_course_schedule");
+        start("hi_reservation_log");
+        start("hi_course");
     }
 
     public static void start(String tableName) {
@@ -101,12 +105,12 @@ public class MysqlGenerator {
         PackageConfig packageConfig = new PackageConfig()
                 .setParent(PACKAGE_NAME)//  父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
                 .setModuleName(MODULE_NAME) //父包模块名
-                .setEntity("entity" + subTableName)
-                .setService("service" + subTableName)
-                .setServiceImpl("serviceImpl" + subTableName)
-                .setController("controller" + subTableName)
-                .setXml("xml" + subTableName)
-                .setMapper("dao" + subTableName);
+                .setEntity("entity" + camel(subTableName))
+                .setService("service" + camel(subTableName))
+                .setServiceImpl("serviceImpl" + camel(subTableName))
+                .setController("controller" + camel(subTableName))
+                .setXml("xml" + camel(subTableName))
+                .setMapper("dao" + camel(subTableName));
 
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
@@ -123,7 +127,7 @@ public class MysqlGenerator {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return OUT_PATH + XML_PATH + "/mappers/" + tableInfo.getName() + "/" + tableInfo.getEntityName() + "-Mapper.xml";
+                return OUT_PATH + XML_PATH + "/mappers/" + camel(tableInfo.getName()) + "/" + tableInfo.getEntityName() + "-Mapper.xml";
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -154,4 +158,27 @@ public class MysqlGenerator {
         mpg.execute();
     }
 
+    /**
+     * 下划线转驼峰
+     *
+     * @param str
+     * @return
+     */
+    public static StringBuffer camel(String str) {
+        //利用正则删除下划线，把下划线后一位改成大写
+        Pattern pattern = Pattern.compile("_(\\w)");
+        Matcher matcher = pattern.matcher(str);
+        StringBuffer sb = new StringBuffer(str);
+        if (matcher.find()) {
+            sb = new StringBuffer();
+            //将当前匹配子串替换为指定字符串，并且将替换后的子串以及其之前到上次匹配子串之后的字符串段添加到一个StringBuffer对象里。
+            //正则之前的字符和被替换的字符
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+            //把之后的也添加到StringBuffer对象里
+            matcher.appendTail(sb);
+        } else {
+            return sb;
+        }
+        return camel(sb.toString());
+    }
 }
