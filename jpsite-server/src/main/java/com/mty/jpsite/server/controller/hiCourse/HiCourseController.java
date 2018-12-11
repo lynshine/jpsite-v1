@@ -27,28 +27,28 @@ public class HiCourseController {
     @Autowired
     private HiCourseService hiCourseService;
 
-    @ApiOperation(value = "/save", notes = "保存课程")
-    @PostMapping("/save")
-    public void save(@RequestBody HiCourse hiCourse) {
+    @ApiOperation(value = "", notes = "保存课程")
+    @PostMapping()
+    public void save(@ApiParam(name = "hiCourse", value = "课程实体", required = true)
+                     @RequestBody HiCourse hiCourse) {
         hiCourseService.save(hiCourse);
     }
 
-    @ApiOperation(value = "/delete", notes = "根据课程id删除")
-    @GetMapping("/delete")
-    public void delete(@ApiParam(name = "id", value = "主键id", required = true) int id) {
+    @ApiOperation(value = "/{id}", notes = "根据课程id删除")
+    @DeleteMapping("/{id}")
+    public void delete(@ApiParam(name = "id", value = "主键id", required = true) @PathVariable("id") int id) {
         hiCourseService.removeById(id);
     }
 
-    @ApiOperation(value = "/update", notes = "修改课程")
-    @PostMapping("/update")
-    public void update(@RequestBody HiCourse hiCourse) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("id", hiCourse.getId());
-        hiCourseService.update(hiCourse, queryWrapper);
+    @ApiOperation(value = "", notes = "修改课程")
+    @PutMapping()
+    public void update(@ApiParam(name = "hiCourse", value = "课程实体", required = true)
+                       @RequestBody HiCourse hiCourse) {
+        hiCourseService.updateById(hiCourse);
     }
 
-    @ApiOperation(value = "/findAll", notes = "查询所有课程")
-    @GetMapping("/findAll")
+    @ApiOperation(value = "", notes = "查询所有课程")
+    @GetMapping()
     public List<HiCourse> findAll() {
         return hiCourseService.list();
     }

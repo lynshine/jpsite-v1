@@ -29,32 +29,45 @@ public class HiUserVipController {
     @Autowired
     private HiUserVipService hiUserVipService;
 
-    @ApiOperation(value = "/save", notes = "保存会员卡")
-    @PostMapping("/save")
-    public void save(@RequestBody HiUserVip hiUserVip) {
+    @ApiOperation(value = "", notes = "保存会员卡")
+    @PostMapping()
+    public void save(@ApiParam(name = "hiUserVip", value = "会员卡实体", required = true)
+                     @RequestBody HiUserVip hiUserVip) {
         hiUserVipService.save(hiUserVip);
     }
 
-    @ApiOperation(value = "/delete", notes = "根据会员卡id删除")
-    @GetMapping("/delete")
-    public void delete(@ApiParam(name = "id", value = "主键id", required = true) int id) {
+    @ApiOperation(value = "/{id}", notes = "根据会员卡id删除")
+    @DeleteMapping("/{id}")
+    public void delete(@ApiParam(name = "id", value = "主键id", required = true)
+                       @PathVariable("id") int id) {
         hiUserVipService.removeById(id);
     }
 
-    @ApiOperation(value = "/findAll", notes = "查询所有会员卡")
-    @GetMapping("/findAll")
-    public List<HiUserVip> findAll() {
-        return hiUserVipService.list();
+    @ApiOperation(value = "", notes = "编辑会员卡信息")
+    @PutMapping()
+    public void update(@ApiParam(name = "hiUserVip", value = "会员卡实体", required = true)
+                       @RequestBody HiUserVip hiUserVip) {
+        hiUserVipService.updateById(hiUserVip);
+    }
+
+    @ApiOperation(value = "", notes = "查询所有会员卡")
+    @GetMapping()
+    public List<HiUserVip> findAll(@ApiParam(name = "userId", value = "用户id")
+                                   @RequestParam(defaultValue = "0", value = "userId") Integer userId) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        if (userId > 0) {
+            queryWrapper.eq("user_id", userId);
+        }
+        return hiUserVipService.list(queryWrapper);
     }
 
     @ApiOperation(value = "/my", notes = "查询我的会员卡")
     @GetMapping("/my")
     public List<HiUserVip> findMe() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        String userId = userDetails.getUsername();
 
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("user_id", userId);
+        queryWrapper.eq("user_id", userDetails.getUsername());
         return hiUserVipService.list(queryWrapper);
     }
 }

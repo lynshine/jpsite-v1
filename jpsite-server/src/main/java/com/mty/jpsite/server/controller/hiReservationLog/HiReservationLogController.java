@@ -12,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -30,27 +29,33 @@ public class HiReservationLogController {
     @Autowired
     private HiReservationLogService hiReservationLogService;
 
-    @ApiOperation(value = "/save", notes = "保存预约记录")
-    @PostMapping("/save")
+    @ApiOperation(value = "", notes = "保存预约记录")
+    @PostMapping()
     public void save(@RequestBody HiReservationLog hiReservationLog) {
         hiReservationLogService.save(hiReservationLog);
     }
 
-    @ApiOperation(value = "/delete", notes = "根据预约记录id删除")
-    @DeleteMapping("/delete")
-    public void delete(@ApiParam(name = "id", value = "主键id", required = true) int id) {
+    @ApiOperation(value = "/{id}", notes = "根据预约记录id删除")
+    @DeleteMapping("/{id}")
+    public void delete(@ApiParam(name = "id", value = "主键id", required = true) @PathVariable("id") int id) {
         hiReservationLogService.removeById(id);
     }
 
-    @ApiOperation(value = "/findAll", notes = "查询所有预约记录")
-    @GetMapping("/findAll")
-    public List<HiReservationLog> findAll() {
-        return hiReservationLogService.list();
+    @ApiOperation(value = "", notes = "查询所有预约记录")
+
+    @GetMapping()
+    public List<HiReservationLog> findAll(@ApiParam(name = "userId", value = "用户id")
+                                          @RequestParam(defaultValue = "0", value = "userId") Integer userId) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        if (userId > 0) {
+            queryWrapper.eq("user_id", userId);
+        }
+        return hiReservationLogService.list(queryWrapper);
     }
 
     @ApiOperation(value = "/my", notes = "查询我的预约记录")
     @GetMapping("/my")
-    public List<HiReservationLog> findMe(HttpServletRequest request) {
+    public List<HiReservationLog> findMe() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_id", userDetails.getUsername());
