@@ -2,7 +2,7 @@ package com.mty.jpsite.security.social.weixin.config;
 
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.core.properties.WeixinProperties;
-import com.mty.jpsite.security.social.weixin.WeixinBindConnectView;
+import com.mty.jpsite.security.social.connect.SocialConnectView;
 import com.mty.jpsite.security.social.weixin.connect.WeixinConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,8 +27,6 @@ public class WeixinAutoConfiguration extends SocialConfigurerAdapter {
 
     /**
      * 实例化 WeixinConnectionFactory 连接工厂
-     *
-     * @return WeixinConnectionFactory
      */
     @Bean
     public WeixinConnectionFactory weixinConnectionFactory() {
@@ -42,11 +40,14 @@ public class WeixinAutoConfiguration extends SocialConfigurerAdapter {
         cfConfig.addConnectionFactory(weixinConnectionFactory());
     }
 
-//    @Bean({"connect/weixinConnect", "connect/weixinConnected"})
-    @Bean(name = {"connect/weixinConnect","connect/weixinConnected"})
+    /**
+     * 社交綁定与解绑
+     * @return
+     */
+    @Bean(name = {"connect/weixinConnect", "connect/weixinConnected"})
     @ConditionalOnMissingBean(name = "weixinConnectedView")  //如果有名为weixinConnectedView bean 则覆盖以下默认实现
     public View weixinConnectedView() {
-        return new WeixinBindConnectView();
+        return new SocialConnectView();
     }
 
 }

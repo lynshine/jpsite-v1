@@ -33,6 +33,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     /**
      * 默认注册的StringHttpMessageConverter字符集为ISO-8859-1，而微信返回的是UTF-8的，所以覆盖原来的方法。
      */
+    @Override
     protected List<HttpMessageConverter<?>> getMessageConverters() {
         List<HttpMessageConverter<?>> messageConverters = super.getMessageConverters();
         messageConverters.remove(0);
@@ -47,17 +48,18 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     public WeixinUserInfo getUserInfo(String openId) {
         String url = URL_GET_USER_INFO + openId;
         String response = getRestTemplate().getForObject(url, String.class);
+
         log.info("====>获取微信用户信息：{}", response);
+
         if (StringUtils.contains(response, "errcode")) {
             return null;
         }
-        WeixinUserInfo profile = null;
+        WeixinUserInfo userInfo = null;
         try {
-            profile = objectMapper.readValue(response, WeixinUserInfo.class);
+            userInfo = objectMapper.readValue(response, WeixinUserInfo.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return profile;
+        return userInfo;
     }
-
 }

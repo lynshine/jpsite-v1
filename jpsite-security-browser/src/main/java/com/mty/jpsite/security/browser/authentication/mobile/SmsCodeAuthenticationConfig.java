@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.browser.authentication;
+package com.mty.jpsite.security.browser.authentication.mobile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -57,12 +57,10 @@ public class SmsCodeAuthenticationConfig extends SecurityConfigurerAdapter<Defau
         String key = UUID.randomUUID().toString();
         smsCodeAuthenticationFilter.setRememberMeServices(new PersistentTokenBasedRememberMeServices(key, userDetailsService, persistentTokenRepository));
 
-
+        //设置自定义SmsCodeAuthenticationProvider的认证器userDetailsService
         SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
         smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
-        /**
-         * 加入认证
-         */
+        //在UsernamePasswordAuthenticationFilter过滤前执行
         http.authenticationProvider(smsCodeAuthenticationProvider)
                 .addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }

@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.social.weixin.connect;
+package com.mty.jpsite.security.social.weixin.api;
 
 import lombok.Data;
 import org.springframework.social.oauth2.AccessGrant;

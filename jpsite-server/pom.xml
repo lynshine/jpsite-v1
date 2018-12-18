@@ -102,6 +102,14 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/${project.artifactId}/</outputDirectory>
+                </configuration>
+            </plugin>
             <!-- 这样打出来的包ToolHelper-0.0.1-SNAPSHOT.jar和original-ToolHelper-0.0.1-SNAPSHOT.jar
              original-是原始包就是不含第三方jar的，另一个是含第三方jar的
             <plugin>

@@ -1,7 +1,7 @@
 package com.mty.jpsite.security.social;
 
 /**
- * Created by jiangpeng on 2018/11/28.
+ * spring boot maven打包使用
  */
 public class SocialApplication {
     public static void main(String[] args) {

@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.AbstractView;
  * 查看帐号绑定情况
  */
 @Component("connect/status")
-public class JpsiteConnectView extends AbstractView {
+public class SocialConnectView extends AbstractView {
     @Autowired
     private ObjectMapper objectMapper;
 

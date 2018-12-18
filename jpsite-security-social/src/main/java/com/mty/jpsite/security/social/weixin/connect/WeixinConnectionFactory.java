@@ -1,6 +1,7 @@
 package com.mty.jpsite.security.social.weixin.connect;
 
 import com.mty.jpsite.security.social.weixin.api.Weixin;
+import com.mty.jpsite.security.social.weixin.api.WeixinAccessGrant;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;

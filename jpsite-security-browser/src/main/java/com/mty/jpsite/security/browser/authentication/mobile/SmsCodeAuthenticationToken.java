@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.browser.authentication;
+package com.mty.jpsite.security.browser.authentication.mobile;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,13 +11,14 @@ import java.util.Collection;
  */
 public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
-    // ~ Instance fields
+    /**
+     * 手机号
+     */
     private final Object principal;
 
     /**
-     * This constructor can be safely used by any code that wishes to create a
-     * <code>UsernamePasswordAuthenticationToken</code>, as the {@link #isAuthenticated()}
-     * will return <code>false</code>.
+     * SmsCodeAuthenticationFilter中构建的未认证的Authentication
+     * @param mobile
      */
     public SmsCodeAuthenticationToken(String mobile) {
         super(null);
@@ -26,10 +27,7 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
     }
 
     /**
-     * This constructor should only be used by <code>AuthenticationManager</code> or
-     * <code>AuthenticationProvider</code> implementations that are satisfied with
-     * producing a trusted (i.e. {@link #isAuthenticated()} = <code>true</code>)
-     * authentication token.
+     * SmsCodeAuthenticationProvider中构建已认证的Authentication
      *
      * @param principal
      * @param authorities
@@ -37,6 +35,7 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
     public SmsCodeAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
+        //必须使用super，因为我们重写
         super.setAuthenticated(true);
     }
 
@@ -45,6 +44,7 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
         return null;
     }
 
+    @Override
     public Object getPrincipal() {
         return this.principal;
     }
@@ -57,6 +57,7 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
         }
     }
 
+    @Override
     public void eraseCredentials() {
         super.eraseCredentials();
     }

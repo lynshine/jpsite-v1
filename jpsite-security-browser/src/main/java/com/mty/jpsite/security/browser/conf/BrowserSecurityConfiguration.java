@@ -1,13 +1,11 @@
 package com.mty.jpsite.security.browser.conf;
 
-import com.mty.jpsite.security.browser.authentication.SmsCodeAuthenticationConfig;
+import com.mty.jpsite.security.browser.authentication.mobile.SmsCodeAuthenticationConfig;
 import com.mty.jpsite.security.core.authorize.AuthorizeConfigManager;
-import com.mty.jpsite.security.core.properties.SecurityConstants;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

@@ -3,6 +3,7 @@ package com.mty.jpsite.security.social.weixin.connect;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import com.mty.jpsite.security.social.weixin.api.WeixinAccessGrant;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -20,11 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 完成微信的OAuth2认证流程的模板类。国内厂商实现的OAuth2每个都不同, spring默认提供的OAuth2Template适应不了，只能针对每个厂商自己微调。
  */
 public class WeixinOAuth2Template extends OAuth2Template {
-
     private String clientId;
-
     private String clientSecret;
-
     private String accessTokenUrl;
 
     private static final String REFRESH_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
@@ -119,5 +117,4 @@ public class WeixinOAuth2Template extends OAuth2Template {
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
         return restTemplate;
     }
-
 }

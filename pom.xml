@@ -8,10 +8,10 @@
     <artifactId>jpsite-v1</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>jpsite-parent</module>
         <module>jpsite-security-core</module>
         <module>jpsite-security-browser</module>
         <module>jpsite-security-social</module>
-        <module>jpsite-parent</module>
         <module>jpsite-server</module>
         <module>jpsite-client</module>
     </modules>

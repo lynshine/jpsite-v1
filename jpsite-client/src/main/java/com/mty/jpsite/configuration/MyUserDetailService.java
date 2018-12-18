@@ -33,8 +33,6 @@ public class MyUserDetailService implements UserDetailsService, SocialUserDetail
     private Logger logger = LoggerFactory.getLogger(MyUserDetailService.class);
 
     @Autowired
-    private ProviderSignInUtils providerSignInUtils;
-    @Autowired
     private UserService userService;
     @Autowired
     private RoleService roleService;

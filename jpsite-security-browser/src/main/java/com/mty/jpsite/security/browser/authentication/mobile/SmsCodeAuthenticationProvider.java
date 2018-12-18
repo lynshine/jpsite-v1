@@ -1,4 +1,4 @@
-package com.mty.jpsite.security.browser.authentication;
+package com.mty.jpsite.security.browser.authentication.mobile;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -28,21 +28,25 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
-        /**
-         * 根据mobile获取系统用户信息
-         */
+        //调用自定义的userDetailsService认证
         UserDetails user = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
         if (user == null) {
             throw new InternalAuthenticationServiceException("无法获取用户信息");
         }
         log.info("====>获取到用户：{}", user);
+        //如果user不为空重新构建SmsCodeAuthenticationToken（已认证）
         SmsCodeAuthenticationToken authenticationTokenResult = new SmsCodeAuthenticationToken(user, user.getAuthorities());
         authenticationTokenResult.setDetails(authenticationToken.getDetails());
         return authenticationTokenResult;
     }
 
+    /**
+     * 只有Authentication为SmsCodeAuthenticationToken使用此Provider认证
+     * @param authentication
+     * @return
+     */
     @Override
-    public boolean supports(Class<?> aClass) {
-        return SmsCodeAuthenticationToken.class.isAssignableFrom(aClass);
+    public boolean supports(Class<?> authentication) {
+        return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

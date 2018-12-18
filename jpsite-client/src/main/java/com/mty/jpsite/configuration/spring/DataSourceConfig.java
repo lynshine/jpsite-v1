@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 public class DataSourceConfig {
-    @Bean(name = "dataSource")
+    @Bean
     public DataSource dataSource(Environment env) {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
