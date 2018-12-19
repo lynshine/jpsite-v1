@@ -1,21 +1,16 @@
 package com.mty.jpsite.security.core.domain;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.io.Serializable;
+
 /**
- * Created by jiangpeng on 2018/11/7.
+ * SecurityResponse content 安全响应
  */
-public class SecurityResponse {
-
-    public SecurityResponse(Object content) {
-        this.content = content;
-    }
-
+@Data
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class SecurityResponse implements Serializable {
     private Object content;
-
-    public Object getContent() {
-        return content;
-    }
-
-    public void setContent(Object content) {
-        this.content = content;
-    }
 }
