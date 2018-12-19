@@ -72,7 +72,8 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .expiredSessionStrategy(sessionInformationExpiredStrategy) // 并发登录导致session失效时，默认的处理策略
                 .and()
                 .and()
-                .logout().logoutUrl(securityProperties.getBrowser().getSignOutUrl())  // 退出登录
+                .logout()
+                .logoutUrl(securityProperties.getBrowser().getSignOutUrl())  // 退出登录
                 .logoutSuccessHandler(logoutSuccessHandler)  //退出成功处理器
                 .deleteCookies("JSESSIONID")   // 删除浏览器上的session记录
                 .and()

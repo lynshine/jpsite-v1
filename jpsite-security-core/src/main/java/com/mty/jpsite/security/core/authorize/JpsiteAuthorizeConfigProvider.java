@@ -29,6 +29,8 @@ public class JpsiteAuthorizeConfigProvider implements AuthorizeConfigProvider {
                 securityProperties.getBrowser().getSignUpUrl(),
                 securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
                 securityProperties.getBrowser().getSignOutUrl(),
+                "/socialRegister",//社交账号注册和绑定页面
+                "/user/register",//处理社交注册请求
                 "/regist"
         ).permitAll();
 

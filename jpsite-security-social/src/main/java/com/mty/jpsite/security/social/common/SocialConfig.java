@@ -116,7 +116,7 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
 
     /**
      * 用来处理注册流程的工具类
-     *
+     * 从Session中获取社交账号信息
      * @param connectionFactoryLocator
      * @return
      */

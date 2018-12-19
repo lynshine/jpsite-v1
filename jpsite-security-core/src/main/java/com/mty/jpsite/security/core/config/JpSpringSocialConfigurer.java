@@ -40,6 +40,8 @@ public class JpSpringSocialConfigurer extends SpringSocialConfigurer {
         if (socialAuthenticationFilterPostProcessor != null) {
             socialAuthenticationFilterPostProcessor.process(filter);
         }
+        // todo 添加自定义注册请求/socialRegister
+//        filter.setSignupUrl("/socialRegister");
         return (T) filter;
     }
 }

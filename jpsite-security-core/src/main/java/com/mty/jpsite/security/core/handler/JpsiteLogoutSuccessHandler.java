@@ -2,12 +2,13 @@ package com.mty.jpsite.security.core.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mty.jpsite.security.core.domain.SecurityResponse;
+import com.mty.jpsite.security.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import java.io.IOException;
  */
 @Slf4j
 public class JpsiteLogoutSuccessHandler implements LogoutSuccessHandler {
+    @Autowired
+    private SecurityProperties securityProperties;
     /**
      * 退出成功跳转url
      */
@@ -40,7 +43,7 @@ public class JpsiteLogoutSuccessHandler implements LogoutSuccessHandler {
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(new SecurityResponse("退出成功")));
         } else {
-            response.sendRedirect(signOutSuccessUrl);
+            response.sendRedirect(securityProperties.getBrowser().getSignUpUrl());
         }
     }
 }
