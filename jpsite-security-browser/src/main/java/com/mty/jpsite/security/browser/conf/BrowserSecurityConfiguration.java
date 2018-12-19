@@ -1,11 +1,13 @@
 package com.mty.jpsite.security.browser.conf;
 
 import com.mty.jpsite.security.browser.authentication.SmsCodeAuthenticationConfig;
+import com.mty.jpsite.security.core.authorize.AuthorizeConfigManager;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,7 +24,7 @@ import javax.sql.DataSource;
 
 
 /**
- * 浏览器环境下安全配置主类
+ * 浏览器环境下安全配置主类 extends {@link WebSecurityConfigurerAdapter}
  */
 @Configuration
 @EnableWebSecurity
@@ -47,51 +49,41 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private InvalidSessionStrategy invalidSessionStrategy;
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        formAuthenticationConfig.configure(http);
+        formAuthenticationConfig.configure(http);  //表单登录验证
 
-        http.apply(validateCodeSecurityConfig)
+        http.apply(validateCodeSecurityConfig)   // 验证码
                 .and()
-                .apply(smsCodeAuthenticationConfig)
+                .apply(smsCodeAuthenticationConfig)  //短信验证码
                 .and()
-                .apply(jpSpringSocialConfigurer)
+                .apply(jpSpringSocialConfigurer)  //社交登录
                 .and()
-                .rememberMe()
+                .rememberMe()    // 记住登录
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                 .userDetailsService(userDetailsService)
                 .and()
                 .sessionManagement()
-//                .invalidSessionUrl("/session/invalid")  直接session失效
-                .invalidSessionStrategy(invalidSessionStrategy)
+                .invalidSessionStrategy(invalidSessionStrategy)  // session失效处理策略
                 .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())  //session并发
-                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())  //session的数量达到最大数量之后，阻止后来的登录行为
-                .expiredSessionStrategy(sessionInformationExpiredStrategy)
+                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())  //session的数量达到最大数量之后，是否阻止后来的登录行为
+                .expiredSessionStrategy(sessionInformationExpiredStrategy) // 并发登录导致session失效时，默认的处理策略
                 .and()
                 .and()
-                .logout().logoutUrl("/signOut")
-                .logoutSuccessHandler(logoutSuccessHandler)
-                .deleteCookies("JSESSIONID")
-                .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignOutUrl(),
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        "/user/regist",
-//                        "/session/invalid",
-                        "/actuator/*"
-                )
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                .logout().logoutUrl(securityProperties.getBrowser().getSignOutUrl())  // 退出登录
+                .logoutSuccessHandler(logoutSuccessHandler)  //退出成功处理器
+                .deleteCookies("JSESSIONID")   // 删除浏览器上的session记录
                 .and()
                 .csrf().disable();
+
+        /**
+         * 权限授权url配置管理器
+         */
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 
     /**
@@ -107,10 +99,8 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 需要配置这个支持password模式
+     * 需要配置这个支持oAuth2 password模式
      * support password grant type
-     * @return
-     * @throws Exception
      */
     @Override
     @Bean

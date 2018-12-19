@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.mty.jpsite.security.social.qq.connet;
 
 import com.mty.jpsite.security.social.qq.api.QQ;
@@ -32,8 +29,10 @@ public class QQAdapter implements ApiAdapter<QQ> {
 
         values.setDisplayName(userInfo.getNickname());
         values.setImageUrl(userInfo.getFigureurl_qq_1());
-        values.setProfileUrl(null);   //个人主页
-        values.setProviderUserId(userInfo.getOpenId());  //服务商用户ID
+        /**个人主页*/
+        values.setProfileUrl(null);
+        /**服务商用户ID*/
+        values.setProviderUserId(userInfo.getOpenId());
     }
 
     @Override

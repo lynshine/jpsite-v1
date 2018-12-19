@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.mty.jpsite.security.social.qq.conf;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,23 +15,28 @@ import java.nio.charset.Charset;
  * QQOAuth2Template   认证模板
  */
 public class QQOAuth2Template extends OAuth2Template {
-
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     public QQOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
         super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
-        // 可以自己制定参数
+        /**
+         * 在Spring Security中默认不带上client_id和client_secret参数,而QQ需要这两个参数,所以我们要在QQOAuth2Template的构造器中加上
+         */
         setUseParametersForClientAuthentication(true);
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.social.oauth2.OAuth2Template#postForAccessGrant(java.lang.String, org.springframework.util.MultiValueMap)
+    /**
+     * post方式发送接入请求
+     *
+     * @param accessTokenUrl
+     * @param parameters
+     * @return
      */
     @Override
     protected AccessGrant postForAccessGrant(String accessTokenUrl, MultiValueMap<String, String> parameters) {
         String responseStr = getRestTemplate().postForObject(accessTokenUrl, parameters, String.class);
 
-        logger.info("获取accessToke的响应：" + responseStr);
+        logger.info("====>获取accessToke的响应：" + responseStr);
 
         String[] items = StringUtils.splitByWholeSeparatorPreserveAllTokens(responseStr, "&");
 
@@ -45,12 +47,10 @@ public class QQOAuth2Template extends OAuth2Template {
         return new AccessGrant(accessToken, null, refreshToken, expiresIn);
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.social.oauth2.OAuth2Template#createRestTemplate()
-     */
     @Override
     protected RestTemplate createRestTemplate() {
         RestTemplate restTemplate = super.createRestTemplate();
+        /**消息内容格式转换为utf-8*/
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
         return restTemplate;
     }

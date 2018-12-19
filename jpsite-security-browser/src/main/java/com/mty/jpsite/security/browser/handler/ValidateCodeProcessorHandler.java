@@ -9,8 +9,6 @@ import java.util.Map;
 
 /**
  * 校验码处理器管理器
- *
- * @author zhailiang
  */
 @Component
 public class ValidateCodeProcessorHandler {
@@ -19,7 +17,7 @@ public class ValidateCodeProcessorHandler {
     private Map<String, ValidateCodeProcess> validateCodeProcessors;
 
     /**
-     * @param type ValidateCodeType枚举
+     * @param type 验证码类型
      * @return
      */
     public ValidateCodeProcess findValidateCodeProcessor(ValidateCodeType type) {
@@ -27,7 +25,7 @@ public class ValidateCodeProcessorHandler {
     }
 
     /**
-     * 根据验证码类型不同，调用不同的  ValidateCodeProcessor 接口实现
+     * 根据验证码类型不同，从validateCodeProcessors Map调用不同的ValidateCodeProcessor 接口实现
      *
      * @param type 验证码类型
      * @return

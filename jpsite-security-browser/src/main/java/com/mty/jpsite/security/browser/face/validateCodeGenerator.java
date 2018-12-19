@@ -1,6 +1,6 @@
 package com.mty.jpsite.security.browser.face;
 
-import com.mty.jpsite.security.browser.domain.ValidateCode;
+import com.mty.jpsite.security.core.domain.ValidateCode;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**

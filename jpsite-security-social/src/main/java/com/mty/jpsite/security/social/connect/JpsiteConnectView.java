@@ -19,7 +19,6 @@ import org.springframework.web.servlet.view.AbstractView;
  */
 @Component("connect/status")
 public class JpsiteConnectView extends AbstractView {
-
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -27,16 +26,10 @@ public class JpsiteConnectView extends AbstractView {
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
                                            HttpServletResponse response) throws Exception {
 
-		/*response.setContentType("text/html;charset=UTF-8");
-		if (model.get("connections") == null) {
-			response.getWriter().write("<h3>解绑成功</h3>");
-		} else {
-			response.getWriter().write("<h3>绑定成功</h3>");
-		}
-*/
-        // key是微信或qq ， list是否有连接
+        /** key是微信或qq ， list是否有连接 userConnection表*/
         Map<String, List<Connection<?>>> connection = (Map<String, List<Connection<?>>>) model.get("connectionMap");
         Map<String, Boolean> result = new HashMap<String, Boolean>();
+
         for (String key : connection.keySet()) {
             result.put(key, CollectionUtils.isNotEmpty(connection.get(key)));
         }

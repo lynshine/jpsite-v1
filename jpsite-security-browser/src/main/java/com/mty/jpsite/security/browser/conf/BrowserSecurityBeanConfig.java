@@ -13,10 +13,7 @@ import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 /**
- * 浏览器环境下扩展点配置，配置在这里的bean，业务系统都可以通过声明同类型或同名的bean来覆盖安全
- * 模块默认的配置。
- *
- * @author zhailiang
+ * 浏览器环境下扩展点配置，配置在这里的bean，业务系统都可以通过声明同类型或同名的bean来覆盖安全模块默认的配置。
  */
 @Configuration
 public class BrowserSecurityBeanConfig {
@@ -26,8 +23,7 @@ public class BrowserSecurityBeanConfig {
 
     /**
      * session失效时的处理策略配置
-     *
-     * @return
+     * 结合使用注解@ConditionalOnMissingBean和@Bean,可以做到只有特定名称或者类型的Bean不存在于BeanFactory中时才创建JpsiteInvalidSessionStrategy
      */
     @Bean
     @ConditionalOnMissingBean(InvalidSessionStrategy.class)
@@ -37,8 +33,6 @@ public class BrowserSecurityBeanConfig {
 
     /**
      * 并发登录导致前一个session失效时的处理策略配置
-     *
-     * @return
      */
     @Bean
     @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
@@ -48,8 +42,6 @@ public class BrowserSecurityBeanConfig {
 
     /**
      * 退出时的处理策略配置
-     *
-     * @return
      */
     @Bean
     @ConditionalOnMissingBean(LogoutSuccessHandler.class)

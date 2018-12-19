@@ -2,8 +2,8 @@ package com.mty.jpsite.security.browser.face.impl;
 
 import com.mty.jpsite.security.core.enums.ValidateCodeType;
 import com.mty.jpsite.security.core.exception.ValidateCodeException;
-import com.mty.jpsite.security.browser.domain.ValidateCode;
-import com.mty.jpsite.security.browser.face.ValidateCodeRepository;
+import com.mty.jpsite.security.core.domain.ValidateCode;
+import com.mty.jpsite.security.core.face.ValidateCodeRepository;
 import com.mty.jpsite.security.browser.face.validateCodeGenerator;
 import com.mty.jpsite.security.browser.handler.ValidateCodeProcess;
 import org.apache.commons.lang.StringUtils;
@@ -40,7 +40,11 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      * @param validateCode
      */
     protected void save(ServletWebRequest request, C validateCode) {
-        validateCodeRepository.save(request, validateCode, getValidateCodeType(request));
+        /**
+         * 只取code和过期时间存到session, 因为存入redis的内容需要序列化
+         */
+        ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
+        validateCodeRepository.save(request, code, getValidateCodeType(request));
     }
 
     /**
@@ -76,7 +80,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
      * @return
      */
     private ValidateCodeType getValidateCodeType(ServletWebRequest request) {
-        // 截取当前具体类的前缀SimpleName， 抽象类的实现类
+        /** 截取当前具体类的前缀SimpleName， 找到对应名称 ValidateCodeProcess 抽象类的实现类*/
         String type = StringUtils.substringBefore(getClass().getSimpleName(), "ValidateCodeProcess");
         return ValidateCodeType.valueOf(type.toUpperCase());
     }
@@ -85,12 +89,12 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     public void validate(ServletWebRequest request) {
 
         ValidateCodeType codeType = getValidateCodeType(request);
-        //获取session中的验证码
+        /**获取session中的验证码*/
         C codeInSession = (C) validateCodeRepository.get(request, codeType);
 
         String codeInRequest;
         try {
-            // 获取request携带的验证码
+            /** 获取request携带的验证码*/
             codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(), codeType.getParamNameOnValidate());
         } catch (ServletRequestBindingException e) {
             throw new ValidateCodeException("获取验证码的值失败");
@@ -112,7 +116,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
         if (!StringUtils.equals(codeInSession.getCode(), codeInRequest)) {
             throw new ValidateCodeException(codeType + "验证码不匹配");
         }
-        // 成功则删除session validateCode
+        /** 登录成功后则删除session validateCode*/
         validateCodeRepository.remove(request, codeType);
     }
 }
