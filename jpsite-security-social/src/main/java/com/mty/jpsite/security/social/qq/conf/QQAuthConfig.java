@@ -2,6 +2,7 @@ package com.mty.jpsite.security.social.qq.conf;
 
 import com.mty.jpsite.security.core.properties.QQProperties;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
+import com.mty.jpsite.security.social.common.SocialConfig;
 import com.mty.jpsite.security.social.connect.SocialConnectView;
 import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.View;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "jpsite.security.social.qq", name = "app-id")
-public class QQAuthConfig extends SocialConfigurerAdapter {
+public class QQAuthConfig extends SocialConfig {
     @Autowired
     private SecurityProperties securityProperties;
 

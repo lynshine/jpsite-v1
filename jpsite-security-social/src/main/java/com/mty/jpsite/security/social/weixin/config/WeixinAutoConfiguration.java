@@ -2,6 +2,7 @@ package com.mty.jpsite.security.social.weixin.config;
 
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.core.properties.WeixinProperties;
+import com.mty.jpsite.security.social.common.SocialConfig;
 import com.mty.jpsite.security.social.connect.SocialConnectView;
 import com.mty.jpsite.security.social.weixin.connect.WeixinConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import org.springframework.web.servlet.View;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "jpsite.security.social.weixin", name = "app-id")
-public class WeixinAutoConfiguration extends SocialConfigurerAdapter {
+public class WeixinAutoConfiguration extends SocialConfig {
 
     @Autowired
     private SecurityProperties securityProperties;
