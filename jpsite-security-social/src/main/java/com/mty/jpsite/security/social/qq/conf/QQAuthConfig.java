@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.web.servlet.View;
 
 /**
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.View;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "jpsite.security.social.qq", name = "app-id")
-public class QQAuthConfig {
+public class QQAuthConfig extends SocialConfigurerAdapter {
     @Autowired
     private SecurityProperties securityProperties;
 
