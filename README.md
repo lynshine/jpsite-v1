@@ -1,5 +1,5 @@
 
-![](https://user-gold-cdn.xitu.io/2018/11/12/16705ec180084551?w=673&h=373&f=png&s=184964)
+![](https://user-gold-cdn.xitu.io/2018/11/12/16705ec180084551?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
 ## 技术选型
 |技术| 版本|
@@ -82,7 +82,7 @@ docker exec xxl-job-admin env   //查看系统env
 
 ![](https://user-gold-cdn.xitu.io/2018/11/10/166fe1dca255d1b6?w=1860&h=1136&f=png&s=401863)
 
-![](https://user-gold-cdn.xitu.io/2018/11/10/166fe1e212197a72?w=1950&h=1082&f=png&s=218053)
+![](https://user-gold-cdn.xitu.io/2018/11/10/166fe1e212197a72?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 http://localhost:8089/xxl-job-admin/
 ## apollo配置中心搭建
 ```
@@ -118,10 +118,10 @@ docker cp apollo-admin:/apollo-quick-start/service/apollo-service.log .
 docker cp apollo-admin:/apollo-quick-start/portal/apollo-portal.log .
 ```
 
-![](https://user-gold-cdn.xitu.io/2018/11/11/16701ead4387745c?w=2400&h=1332&f=png&s=287410)
+![](https://user-gold-cdn.xitu.io/2018/11/11/16701ead4387745c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 ![](https://user-gold-cdn.xitu.io/2018/11/11/16701ec1ed5d8fb0?w=2400&h=1332&f=png&s=556523)
 因为Eureka的Instance Info IP为docker内部IP，外部无法使用
-![](https://user-gold-cdn.xitu.io/2018/11/11/167029de824698ac?w=1492&h=308&f=png&s=30190)
+![](https://user-gold-cdn.xitu.io/2018/11/11/167029de824698ac?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 所以添加vm启动参数为宿主机ip
 ![](https://user-gold-cdn.xitu.io/2018/11/11/167029d682aefa21?w=1882&h=470&f=png&s=79986)
 源码阅读解惑
