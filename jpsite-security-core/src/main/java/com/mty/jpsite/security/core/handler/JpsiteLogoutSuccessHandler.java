@@ -44,7 +44,7 @@ public class JpsiteLogoutSuccessHandler implements LogoutSuccessHandler {
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(new SecurityResponse("退出成功")));
         } else {
-            response.sendRedirect(securityProperties.getBrowser().getSignUpUrl());
+            response.sendRedirect(signOutSuccessUrl);
         }
     }
 }
