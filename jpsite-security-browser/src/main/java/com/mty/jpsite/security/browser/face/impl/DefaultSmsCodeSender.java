@@ -12,6 +12,6 @@ public class DefaultSmsCodeSender implements SmsCodeSender {
 
     @Override
     public void send(String mobile, String code) {
-        logger.info("向手机：" + mobile + " 发送短信：" + code);
+        logger.info("====>向手机：" + mobile + " 发送短信：" + code);
     }
 }

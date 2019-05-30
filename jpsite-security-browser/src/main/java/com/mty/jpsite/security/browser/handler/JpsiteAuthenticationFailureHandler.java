@@ -2,7 +2,7 @@ package com.mty.jpsite.security.browser.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mty.jpsite.security.core.domain.SecurityResponse;
-import com.mty.jpsite.security.core.enums.LoginType;
+import com.mty.jpsite.security.core.enums.LoginResponseType;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +37,11 @@ class JpsiteAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureH
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException) throws IOException, ServletException {
-        logger.info("登录失败--loginType: {}", securityProperties.getBrowser().getLoginType());
+        logger.info("====>登录失败--loginType: {}", securityProperties.getBrowser().getLoginResponseType());
 
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         /**判断登录请求类型*/
-        if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
+        if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginResponseType())) {
             response.setContentType("application/json;charset=UTF-8");
             /**将authenticationException失败信息转换为json格式的字符串写到response里面去*/
             response.getWriter().write(objectMapper.writeValueAsString(new SecurityResponse(authenticationException.getMessage())));

@@ -14,42 +14,47 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 角色表
+ * 角色表 
  * </p>
  *
  * @author jiangpeng
- * @since 2018-11-30
+ * @since 2018-12-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("role")
-@ApiModel(value="Role对象", description="角色表")
+@ApiModel(value="Role对象", description="角色表 ")
 public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键ID")
+    @ApiModelProperty(value = "角色id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty(value = "角色名")
     private String name;
 
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createAt;
+    @ApiModelProperty(value = "该记录是否有效1：有效、0：无效")
+    private Boolean status;
 
-    @ApiModelProperty(value = "修改时间")
-    private LocalDateTime updateAt;
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime createTime;
+
+    @ApiModelProperty(value = "更新时间")
+    private LocalDateTime updateTime;
 
 
     public static final String ID = "id";
 
     public static final String NAME = "name";
 
-    public static final String CREATE_AT = "create_at";
+    public static final String STATUS = "status";
 
-    public static final String UPDATE_AT = "update_at";
+    public static final String CREATE_TIME = "create_time";
+
+    public static final String UPDATE_TIME = "update_time";
 
     @Override
     protected Serializable pkVal() {

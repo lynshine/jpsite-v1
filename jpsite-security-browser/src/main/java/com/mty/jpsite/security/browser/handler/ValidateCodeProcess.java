@@ -3,7 +3,7 @@ package com.mty.jpsite.security.browser.handler;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
- * 接口的图片验证码处理器
+ * 图片验证码处理器
  */
 public interface ValidateCodeProcess {
     /**

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 /**
- * 短信认证登录配置
+ * 短信认证登录配置 extends {@link SecurityConfigurerAdapter}
  */
 @Component
 public class SmsCodeAuthenticationConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

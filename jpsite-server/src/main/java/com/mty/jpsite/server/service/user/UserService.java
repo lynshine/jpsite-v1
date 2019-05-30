@@ -1,10 +1,7 @@
 package com.mty.jpsite.server.service.user;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mty.jpsite.server.entity.user.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,8 +9,8 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author jiangpeng
- * @since 2018-11-30
+ * @since 2018-12-06
  */
 public interface UserService extends IService<User> {
-    IPage<User> selectPageVo(Page page, @Param("name") String name);
+
 }
