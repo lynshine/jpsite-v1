@@ -26,7 +26,7 @@ public class ValidateCodeController {
      * @throws Exception
      */
     @GetMapping("/code/{type}")
-    public void ImageCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type) throws Exception {
+    public void imageCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type) throws Exception {
         String name = type.toLowerCase() + ValidateCodeProcess.class.getSimpleName();
         validateCodeProcessors.get(name).create(new ServletWebRequest(request, response));
     }

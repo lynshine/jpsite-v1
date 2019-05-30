@@ -63,7 +63,7 @@ public class XxlJobConfig {
         @Override
         public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
             String value = conditionContext.getEnvironment().getProperty("jpsite.xxl.job.enable");
-            return value.equals("true");
+            return "true".equals(value);
         }
     }
 }

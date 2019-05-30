@@ -52,8 +52,9 @@ public class ZookeeperConf {
                     WatchedEvent watchedEvent = curatorEvent.getWatchedEvent();
                     Watcher.Event.EventType eventType = watchedEvent.getType();
                     logger.info("====>节点变化通知 eventType: {} : path: {}", eventType, watchedEvent.getPath());
-                    if (watchedEvent.getPath() != null)
+                    if (watchedEvent.getPath() != null) {
                         client.checkExists().watched().forPath(watchedEvent.getPath());
+                    }
                 }
             }
         });
@@ -65,7 +66,7 @@ public class ZookeeperConf {
         @Override
         public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
             String value = conditionContext.getEnvironment().getProperty("jpsite.zookeeper.enable");
-            return value.equals("true");
+            return "true".equals(value);
         }
     }
 }

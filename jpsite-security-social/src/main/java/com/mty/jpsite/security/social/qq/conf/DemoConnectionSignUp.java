@@ -24,7 +24,7 @@ public class DemoConnectionSignUp implements ConnectionSignUp {
         @Override
         public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
             String value = conditionContext.getEnvironment().getProperty("jpsite.autoSignUp.enable");
-            return value.equals("true");
+            return "true".equals(value);
         }
     }
 }

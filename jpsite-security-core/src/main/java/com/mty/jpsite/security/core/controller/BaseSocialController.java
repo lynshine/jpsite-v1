@@ -9,7 +9,7 @@ import org.springframework.social.connect.Connection;
 /**
  * 抽象社交控制类 SocialController
  */
-public abstract class SocialController {
+public abstract class BaseSocialController {
 
     /**
      * 根据Connection信息组装SocialUserInfo

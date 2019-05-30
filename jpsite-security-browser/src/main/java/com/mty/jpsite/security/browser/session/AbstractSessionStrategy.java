@@ -83,7 +83,7 @@ public class AbstractSessionStrategy {
                 /** session失效时跳转的地址*/
                 targetUrl = destinationUrl;
             }
-            logger.info("====>跳转到:" + targetUrl);
+            logger.info("====>跳转到:{}", targetUrl);
             redirectStrategy.sendRedirect(request, response, targetUrl);
         } else {
             Object result = buildResponseContent(request);
@@ -99,6 +99,7 @@ public class AbstractSessionStrategy {
      * @return
      */
     protected Object buildResponseContent(HttpServletRequest request) {
+        request.getSession();
         String message = "session已失效";
         if (isConcurrency()) {
             message = message + "，有可能是并发登录导致的";

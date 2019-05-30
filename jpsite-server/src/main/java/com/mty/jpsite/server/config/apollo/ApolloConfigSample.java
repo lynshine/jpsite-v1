@@ -45,7 +45,7 @@ public class ApolloConfigSample {
         @Override
         public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
             String value = conditionContext.getEnvironment().getProperty("jpsite.apollo.enable");
-            return value.equals("true");
+            return "true".equals(value);
         }
     }
 }

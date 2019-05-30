@@ -27,9 +27,11 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
         super(new AntPathRequestMatcher("/authentication/mobile", "POST"));
     }
 
+    @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         /** 非POST请求 throw AuthenticationServiceException*/
-        if (this.postOnly && !request.getMethod().equals("POST")) {
+        String method = "POST";
+        if (this.postOnly && !method.equals(request.getMethod())) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
         String mobile = this.obtainMobile(request);
