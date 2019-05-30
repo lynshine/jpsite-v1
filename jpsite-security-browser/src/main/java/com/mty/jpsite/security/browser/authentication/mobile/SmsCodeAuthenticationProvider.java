@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Data
 @Slf4j
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
+
     private UserDetailsService userDetailsService;
 
     /**

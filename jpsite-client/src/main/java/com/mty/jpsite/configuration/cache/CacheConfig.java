@@ -47,6 +47,7 @@ public class CacheConfig {
     @Bean
     MessageListenerAdapter listenerAdapter(final TwoLevelCacheManager cacheManager) {
         return new MessageListenerAdapter(new MessageListener() {
+            @Override
             public void onMessage(Message message, byte[] pattern) {
                 byte[] bs = message.getChannel();
                 try {
@@ -76,7 +77,7 @@ public class CacheConfig {
         @Override
         public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
             String value = conditionContext.getEnvironment().getProperty("jpsite.redis.enable");
-            return value.equals("true");
+            return "true".equals(value);
         }
     }
 }

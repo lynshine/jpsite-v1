@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,11 +17,11 @@ import java.io.IOException;
 /**
  * 默认的退出成功处理器，如果设置了jpsite.security.browser.signOutUrl，则跳到配置的地址上，
  * 如果没配置，则返回json格式的响应。
+ *
+ * @author zhailiang
  */
 @Slf4j
 public class JpsiteLogoutSuccessHandler implements LogoutSuccessHandler {
-    @Autowired
-    private SecurityProperties securityProperties;
     /**
      * 退出成功跳转url
      */

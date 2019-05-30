@@ -19,6 +19,9 @@ import java.io.IOException;
 
 /**
  * 抽象的session失效处理器
+ *
+ * @author zhailiang
+ *
  */
 @Data
 public class AbstractSessionStrategy {
@@ -99,6 +102,7 @@ public class AbstractSessionStrategy {
      * @return
      */
     protected Object buildResponseContent(HttpServletRequest request) {
+        request.getSession();
         String message = "session已失效";
         if (isConcurrency()) {
             message = message + "，有可能是并发登录导致的";

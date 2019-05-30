@@ -28,6 +28,8 @@ public class WeixinAutoConfiguration extends SocialConfig {
 
     /**
      * 实例化 WeixinConnectionFactory 连接工厂
+     *
+     * @return WeixinConnectionFactory
      */
     @Bean
     public WeixinConnectionFactory weixinConnectionFactory() {
