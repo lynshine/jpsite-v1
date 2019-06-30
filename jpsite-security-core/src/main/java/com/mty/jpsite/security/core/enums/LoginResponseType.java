@@ -1,7 +1,8 @@
 package com.mty.jpsite.security.core.enums;
 
 /**
- * 登录类型
+ * 登录返回类型
+ * @author haha
  */
 public enum LoginResponseType {
     /**

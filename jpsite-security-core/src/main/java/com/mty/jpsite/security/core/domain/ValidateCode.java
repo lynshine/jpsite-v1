@@ -1,5 +1,6 @@
 package com.mty.jpsite.security.core.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -7,8 +8,10 @@ import java.time.LocalDateTime;
 
 /**
  * 验证码
+ * @author haha
  */
 @Data
+@AllArgsConstructor
 public class ValidateCode implements Serializable {
     /**
      * 验证码
@@ -22,11 +25,6 @@ public class ValidateCode implements Serializable {
     public ValidateCode(String code, int expireIn) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
-    }
-
-    public ValidateCode(String code, LocalDateTime expireTime) {
-        this.code = code;
-        this.expireTime = expireTime;
     }
 
     /**

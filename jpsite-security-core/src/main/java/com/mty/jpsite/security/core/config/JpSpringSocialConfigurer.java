@@ -7,7 +7,8 @@ import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
- * 继承默认的社交登录配置，加入自定义的后处理逻辑
+ * 继承默认的社交登录配置，加入自定义的后置处理逻辑
+ * @author haha
  */
 @Data
 public class JpSpringSocialConfigurer extends SpringSocialConfigurer {
@@ -29,7 +30,7 @@ public class JpSpringSocialConfigurer extends SpringSocialConfigurer {
      * {@link ObjectPostProcessor}.
      *
      * @param object 来自post
-     * @return 返回修改的对象使用
+     * @return 返回修改的对象
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -40,8 +41,8 @@ public class JpSpringSocialConfigurer extends SpringSocialConfigurer {
         if (socialAuthenticationFilterPostProcessor != null) {
             socialAuthenticationFilterPostProcessor.process(filter);
         }
-        // todo 添加自定义注册请求/socialRegister
-//        filter.setSignupUrl("/socialRegister");
+        // 设置注册地址
+        filter.setSignupUrl("/socialRegister");
         return (T) filter;
     }
 }

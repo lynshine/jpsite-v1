@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 微信登录配置项属性
+ * @author haha
  */
 @Data
 public class WeixinProperties {

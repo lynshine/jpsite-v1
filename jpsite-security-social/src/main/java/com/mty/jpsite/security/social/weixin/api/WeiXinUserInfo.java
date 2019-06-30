@@ -4,9 +4,10 @@ import lombok.Data;
 
 /**
  * 微信用户信息
+ * @author haha
  */
 @Data
-public class WeixinUserInfo {
+public class WeiXinUserInfo {
     /**
      * 普通用户的标识，对当前开发者帐号唯一
      */

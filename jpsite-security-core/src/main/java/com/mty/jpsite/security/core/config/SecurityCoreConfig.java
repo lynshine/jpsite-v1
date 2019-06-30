@@ -8,12 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-@Configuration
 /**
- * 这个注解是对@ConfigurationProperties的有效支持。
- * 指定注册SecurityProperties bean
+ * @author haha
+ * @EnableConfigurationProperties 是对@ConfigurationProperties的有效支持，指定注册SecurityProperties bean
  */
-@EnableConfigurationProperties(SecurityProperties.class)        // 让SecurityProperties生效
+@Configuration
+@EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityCoreConfig {
     /**
      * 密码加密类
@@ -23,3 +23,5 @@ public class SecurityCoreConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
+

@@ -1,9 +1,7 @@
 package com.mty.jpsite.security.social.weixin.connect;
 
-import java.nio.charset.Charset;
-import java.util.Map;
-
-import com.mty.jpsite.security.social.weixin.api.WeixinAccessGrant;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mty.jpsite.security.social.weixin.api.WeiXinAccessGrant;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -15,21 +13,23 @@ import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.charset.Charset;
+import java.util.Map;
 
 /**
  * 完成微信的OAuth2认证流程的模板类。国内厂商实现的OAuth2每个都不同, spring默认提供的OAuth2Template适应不了，只能针对每个厂商自己微调。
+ * @author haha
  */
-public class WeixinOAuth2Template extends OAuth2Template {
+public class WeiXinOAuth2Template extends OAuth2Template {
     private String clientId;
     private String clientSecret;
     private String accessTokenUrl;
 
-    private static final String REFRESH_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+    private static final String REFRESH_TOKEN_URL = "https://api.WeiXin.qq.com/sns/oauth2/refresh_token";
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public WeixinOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
+    public WeiXinOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
         super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
         setUseParametersForClientAuthentication(true);
         this.clientId = clientId;
@@ -82,7 +82,7 @@ public class WeixinOAuth2Template extends OAuth2Template {
             throw new RuntimeException("获取access token失败, errcode:" + errcode + ", errmsg:" + errmsg);
         }
 
-        WeixinAccessGrant accessToken = new WeixinAccessGrant(
+        WeiXinAccessGrant accessToken = new WeiXinAccessGrant(
                 MapUtils.getString(result, "access_token"),
                 MapUtils.getString(result, "scope"),
                 MapUtils.getString(result, "refresh_token"),

@@ -7,7 +7,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * SecurityResponse content 安全响应
+ * 认证响应
+ * @author haha
  */
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)

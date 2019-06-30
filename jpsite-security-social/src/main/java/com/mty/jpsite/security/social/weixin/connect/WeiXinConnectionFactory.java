@@ -1,7 +1,7 @@
 package com.mty.jpsite.security.social.weixin.connect;
 
-import com.mty.jpsite.security.social.weixin.api.Weixin;
-import com.mty.jpsite.security.social.weixin.api.WeixinAccessGrant;
+import com.mty.jpsite.security.social.weixin.api.WeiXin;
+import com.mty.jpsite.security.social.weixin.api.WeiXinAccessGrant;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
@@ -13,15 +13,16 @@ import org.springframework.social.oauth2.OAuth2ServiceProvider;
 
 /**
  * 微信连接工厂
+ * @author haha
  */
-public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {
+public class WeiXinConnectionFactory extends OAuth2ConnectionFactory<WeiXin> {
 
     /**
      * @param appId
      * @param appSecret
      */
-    public WeixinConnectionFactory(String providerId, String appId, String appSecret) {
-        super(providerId, new WeixinServiceProvider(appId, appSecret), new WeixinAdapter());
+    public WeiXinConnectionFactory(String providerId, String appId, String appSecret) {
+        super(providerId, new WeiXinServiceProvider(appId, appSecret), new WeiXinAdapter());
     }
 
     /**
@@ -29,21 +30,21 @@ public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {
      */
     @Override
     protected String extractProviderUserId(AccessGrant accessGrant) {
-        if (accessGrant instanceof WeixinAccessGrant) {
-            return ((WeixinAccessGrant) accessGrant).getOpenId();
+        if (accessGrant instanceof WeiXinAccessGrant) {
+            return ((WeiXinAccessGrant) accessGrant).getOpenId();
         }
         return null;
     }
 
     @Override
-    public Connection<Weixin> createConnection(AccessGrant accessGrant) {
-        return new OAuth2Connection<Weixin>(getProviderId(), extractProviderUserId(accessGrant), accessGrant.getAccessToken(),
+    public Connection<WeiXin> createConnection(AccessGrant accessGrant) {
+        return new OAuth2Connection<WeiXin>(getProviderId(), extractProviderUserId(accessGrant), accessGrant.getAccessToken(),
                 accessGrant.getRefreshToken(), accessGrant.getExpireTime(), getOAuth2ServiceProvider(), getApiAdapter(extractProviderUserId(accessGrant)));
     }
 
     @Override
-    public Connection<Weixin> createConnection(ConnectionData data) {
-        return new OAuth2Connection<Weixin>(data, getOAuth2ServiceProvider(), getApiAdapter(data.getProviderUserId()));
+    public Connection<WeiXin> createConnection(ConnectionData data) {
+        return new OAuth2Connection<WeiXin>(data, getOAuth2ServiceProvider(), getApiAdapter(data.getProviderUserId()));
     }
 
     /**
@@ -52,12 +53,12 @@ public class WeixinConnectionFactory extends OAuth2ConnectionFactory<Weixin> {
      * @param providerUserId
      * @return
      */
-    private ApiAdapter<Weixin> getApiAdapter(String providerUserId) {
-        return new WeixinAdapter(providerUserId);
+    private ApiAdapter<WeiXin> getApiAdapter(String providerUserId) {
+        return new WeiXinAdapter(providerUserId);
     }
 
-    private OAuth2ServiceProvider<Weixin> getOAuth2ServiceProvider() {
-        return (OAuth2ServiceProvider<Weixin>) getServiceProvider();
+    private OAuth2ServiceProvider<WeiXin> getOAuth2ServiceProvider() {
+        return (OAuth2ServiceProvider<WeiXin>) getServiceProvider();
     }
 
 

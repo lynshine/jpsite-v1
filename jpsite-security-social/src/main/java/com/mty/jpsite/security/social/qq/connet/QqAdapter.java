@@ -1,7 +1,7 @@
 package com.mty.jpsite.security.social.qq.connet;
 
-import com.mty.jpsite.security.social.qq.api.QQ;
-import com.mty.jpsite.security.social.qq.api.QQUserInfo;
+import com.mty.jpsite.security.social.qq.api.Qq;
+import com.mty.jpsite.security.social.qq.api.QqUserInfo;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
@@ -10,17 +10,18 @@ import java.io.IOException;
 
 /**
  * QQ登录适配器
+ * @author haha
  */
-public class QQAdapter implements ApiAdapter<QQ> {
+public class QqAdapter implements ApiAdapter<Qq> {
 
     @Override
-    public boolean test(QQ api) {
+    public boolean test(Qq api) {
         return true;
     }
 
     @Override
-    public void setConnectionValues(QQ api, ConnectionValues values) {
-        QQUserInfo userInfo = null;
+    public void setConnectionValues(Qq api, ConnectionValues values) {
+        QqUserInfo userInfo = null;
         try {
             userInfo = api.getUserInfo();
         } catch (IOException e) {
@@ -36,13 +37,13 @@ public class QQAdapter implements ApiAdapter<QQ> {
     }
 
     @Override
-    public UserProfile fetchUserProfile(QQ api) {
+    public UserProfile fetchUserProfile(Qq api) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void updateStatus(QQ api, String message) {
+    public void updateStatus(Qq api, String message) {
         //do noting
     }
 

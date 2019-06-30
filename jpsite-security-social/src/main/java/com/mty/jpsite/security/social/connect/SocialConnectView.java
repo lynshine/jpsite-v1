@@ -8,19 +8,22 @@ import java.util.Map;
 
 /**
  * 绑定页面视图
- * Created by jiangpeng on 2018/12/19.
+ *
+ * @author jiangpeng
+ * @date 2018/12/19
  */
 public class SocialConnectView extends AbstractView {
+    final String CONNECTIONS = "connections";
+
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String msg = "";
+        String msg;
+
         response.setContentType("text/html;charset=UTF-8");
-        if (model.get("connections") == null) {
-            msg = "unBindingSuccess";
-//            response.getWriter().write("<h3>解绑成功</h3>");
+        if (model.get(CONNECTIONS) == null) {
+            msg = "解绑成功";
         } else {
-            msg = "bindingSuccess";
-//            response.getWriter().write("<h3>绑定成功</h3>");
+            msg = "解绑成功";
         }
 
         response.sendRedirect("/message/" + msg);

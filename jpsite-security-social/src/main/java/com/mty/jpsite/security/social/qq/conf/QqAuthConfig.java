@@ -1,24 +1,24 @@
 package com.mty.jpsite.security.social.qq.conf;
 
-import com.mty.jpsite.security.core.properties.QQProperties;
+import com.mty.jpsite.security.core.properties.QqProperties;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.social.common.SocialConfig;
 import com.mty.jpsite.security.social.connect.SocialConnectView;
-import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;
+import com.mty.jpsite.security.social.qq.connet.QqConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.web.servlet.View;
 
 /**
  * QQ登录配置
+ * @author haha
  */
 @Configuration
 @ConditionalOnProperty(prefix = "jpsite.security.social.qq", name = "app-id")
-public class QQAuthConfig extends SocialConfig {
+public class QqAuthConfig extends SocialConfig {
     @Autowired
     private SecurityProperties securityProperties;
 
@@ -28,9 +28,9 @@ public class QQAuthConfig extends SocialConfig {
      * @return QQConnectionFactory
      */
     @Bean
-    public QQConnectionFactory qqConnectionFactory() {
-        QQProperties qqConfig = securityProperties.getSocial().getQq();
-        return new QQConnectionFactory(qqConfig.getProviderId(), qqConfig.getAppId(), qqConfig.getAppSecret());
+    public QqConnectionFactory qqConnectionFactory() {
+        QqProperties qqConfig = securityProperties.getSocial().getQq();
+        return new QqConnectionFactory(qqConfig.getProviderId(), qqConfig.getAppId(), qqConfig.getAppSecret());
     }
     /**
      * /connect/qq POST请求,绑定微信返回connect/qqConnected视图

@@ -12,16 +12,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.social.config.annotation.ConnectionFactoryConfigurer;
-import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.web.servlet.View;
 
 
 /**
  * 微信登录配置
+ * @author haha
  */
 @Configuration
 @ConditionalOnProperty(prefix = "jpsite.security.social.weixin", name = "app-id")
-public class WeixinAutoConfiguration extends SocialConfig {
+public class WeiXinAutoConfiguration extends SocialConfig {
 
     @Autowired
     private SecurityProperties securityProperties;

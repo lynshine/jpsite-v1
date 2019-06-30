@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * 第三方登录自动注册
+ * @author haha
+ * @Conditional(DemoConnectionSignUp.AutoSignUp.class) 是否自动注册
  */
-@Conditional(DemoConnectionSignUp.AutoSignUp.class)   //是否自动注册
+@Conditional(DemoConnectionSignUp.AutoSignUp.class)
 @Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
     @Autowired

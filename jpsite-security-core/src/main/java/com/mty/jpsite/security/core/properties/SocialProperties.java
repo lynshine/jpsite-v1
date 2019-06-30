@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 社交登录配置项
+ * @author haha
  */
 @Data
 public class SocialProperties {
@@ -14,7 +15,7 @@ public class SocialProperties {
     /**
      * QQ配置属性
      */
-    private QQProperties qq = new QQProperties();
+    private QqProperties qq = new QqProperties();
     /**
      * 微信配置属性
      */

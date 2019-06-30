@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * 社交用户信息
+ * @author haha
  */
 @Data
 public class SocialUserInfo implements Serializable {

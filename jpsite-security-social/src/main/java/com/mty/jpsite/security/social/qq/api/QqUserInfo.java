@@ -4,9 +4,10 @@ import lombok.Data;
 
 /**
  * QQ返回对象
+ * @author haha
  */
 @Data
-public class QQUserInfo {
+public class QqUserInfo {
     /**
      * 返回码
      */

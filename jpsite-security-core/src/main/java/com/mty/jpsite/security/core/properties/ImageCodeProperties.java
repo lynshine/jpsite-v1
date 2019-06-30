@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 图片验证码配置项
+ * @author haha
  */
 @Data
 public class ImageCodeProperties extends SmsCodeProperties {
@@ -17,6 +18,6 @@ public class ImageCodeProperties extends SmsCodeProperties {
     private int height = 23;
 
     public ImageCodeProperties() {
-        setLength(4);
+        super.setLength(4);
     }
 }

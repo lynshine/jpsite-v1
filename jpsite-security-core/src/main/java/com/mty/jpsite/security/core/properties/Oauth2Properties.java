@@ -4,9 +4,10 @@ import lombok.Data;
 
 /**
  * OAuth2 参数配置
+ * @author haha
  */
 @Data
-public class OAuth2Properties {
+public class Oauth2Properties {
     /**
      * 使用jwt时为token签名的秘钥
      */
@@ -14,5 +15,5 @@ public class OAuth2Properties {
     /**
      * 客户端配置
      */
-    private OAuth2ClientProperties[] clients = {};
+    private Oauth2ClientProperties[] clients = {};
 }

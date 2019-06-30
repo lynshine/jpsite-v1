@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * session管理相关配置项
+ * @author haha
  */
 @Data
 public class SessionProperties {

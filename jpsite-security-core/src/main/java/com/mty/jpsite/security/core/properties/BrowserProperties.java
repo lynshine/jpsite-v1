@@ -6,6 +6,8 @@ import lombok.Data;
 
 /**
  * 浏览器环境配置项
+ *
+ * @author haha
  */
 @Data
 public class BrowserProperties {
@@ -14,9 +16,18 @@ public class BrowserProperties {
      */
     private SessionProperties session = new SessionProperties();
     private String signUpUrl = "/sign_up.html";
-    private String loginPage = "/login_in.html";  // 默认登录页面
-    private int rememberMeSeconds = 3600;    //默认记住时间
-    private LoginResponseType loginResponseType = LoginResponseType.JSON;   //默认登录类型JSON
+    /**
+     * 默认登录页面
+     */
+    private String loginPage = "/login_in.html";
+    /**
+     * 默认记住时间
+     */
+    private int rememberMeSeconds = 3600;
+    /**
+     * 默认登录类型JSON
+     */
+    private LoginResponseType loginResponseType = LoginResponseType.JSON;
     /**
      * 退出成功时跳转的url，如果配置了，则跳到指定的url，如果没配置，则返回json数据。
      */

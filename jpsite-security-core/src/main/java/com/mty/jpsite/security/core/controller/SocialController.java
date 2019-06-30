@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.mty.jpsite.security.core.controller;
 
 import com.mty.jpsite.security.core.domain.SocialUserInfo;
@@ -8,6 +5,7 @@ import org.springframework.social.connect.Connection;
 
 /**
  * 抽象社交控制类 SocialController
+ * @author haha
  */
 public abstract class SocialController {
 

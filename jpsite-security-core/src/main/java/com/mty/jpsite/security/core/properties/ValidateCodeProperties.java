@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 验证码配置属性
+ * @author haha
  */
 @Data
 public class ValidateCodeProperties {

@@ -4,9 +4,10 @@ import lombok.Data;
 
 /**
  * 认证服务器注册的第三方应用配置项
+ * @author haha
  */
 @Data
-public class OAuth2ClientProperties {
+public class Oauth2ClientProperties {
 	/**
 	 * 第三方应用appId
 	 */

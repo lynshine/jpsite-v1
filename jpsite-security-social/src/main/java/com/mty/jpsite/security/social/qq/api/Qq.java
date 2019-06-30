@@ -4,12 +4,13 @@ import java.io.IOException;
 
 /**
  * QQ interface
+ * @author haha
  */
-public interface QQ {
+public interface Qq {
     /**
-     * 获取 QQUserInfo
-     * @return QQUserInfo
+     * 获取 QqUserInfo
+     * @return QqUserInfo
      * @throws IOException
      */
-    QQUserInfo getUserInfo() throws IOException;
+    QqUserInfo getUserInfo() throws IOException;
 }

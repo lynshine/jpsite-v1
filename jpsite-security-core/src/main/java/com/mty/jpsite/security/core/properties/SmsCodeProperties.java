@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * 短信验证码
+ * @author haha
  */
 @Data
 public class SmsCodeProperties {

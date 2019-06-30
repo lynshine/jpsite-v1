@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.AbstractView;
 
 /**
  * 查看帐号绑定情况
+ * @author haha
  */
 @Component("connect/status")
 public class SocialConnectionStatusView  extends AbstractView {
@@ -25,12 +26,12 @@ public class SocialConnectionStatusView  extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
                                            HttpServletResponse response) throws Exception {
-
-        /** key是微信或qq ， list是否有连接 userConnection表*/
+        /** key是weixin或qq ， list是否有连接userConnection表*/
         Map<String, List<Connection<?>>> connection = (Map<String, List<Connection<?>>>) model.get("connectionMap");
-        Map<String, Boolean> result = new HashMap<String, Boolean>();
+        Map<String, Boolean> result = new HashMap<String, Boolean>(16);
 
         for (String key : connection.keySet()) {
+            // value 为false表示没有绑定
             result.put(key, CollectionUtils.isNotEmpty(connection.get(key)));
         }
 

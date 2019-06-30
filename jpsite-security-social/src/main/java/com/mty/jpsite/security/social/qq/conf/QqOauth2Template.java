@@ -13,11 +13,12 @@ import java.nio.charset.Charset;
 
 /**
  * QQOAuth2Template   认证模板
+ * @author haha
  */
-public class QQOAuth2Template extends OAuth2Template {
+public class QqOauth2Template extends OAuth2Template {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public QQOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
+    public QqOauth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
         super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
         /**
          * 在Spring Security中默认不带上client_id和client_secret参数,而QQ需要这两个参数,所以我们要在QQOAuth2Template的构造器中加上

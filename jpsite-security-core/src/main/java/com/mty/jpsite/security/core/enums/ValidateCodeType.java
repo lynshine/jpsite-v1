@@ -4,6 +4,7 @@ import com.mty.jpsite.security.core.properties.SecurityConstants;
 
 /**
  * 验证码类型
+ * @author haha
  */
 public enum ValidateCodeType {
     /**

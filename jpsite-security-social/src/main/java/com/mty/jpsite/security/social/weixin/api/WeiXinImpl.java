@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * Weixin API调用模板， scope为Request的Spring bean, 根据当前用户的accessToken创建。
  */
 @Slf4j
-public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
+public class WeiXinImpl extends AbstractOAuth2ApiBinding implements WeiXin {
     private ObjectMapper objectMapper = new ObjectMapper();
     /**
      * 获取用户信息的url
@@ -26,7 +26,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     /**
      * @param accessToken
      */
-    public WeixinImpl(String accessToken) {
+    public WeiXinImpl(String accessToken) {
         super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
     }
 
@@ -45,7 +45,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
      * 获取微信用户信息。
      */
     @Override
-    public WeixinUserInfo getUserInfo(String openId) {
+    public WeiXinUserInfo getUserInfo(String openId) {
         String url = URL_GET_USER_INFO + openId;
         String response = getRestTemplate().getForObject(url, String.class);
 
@@ -54,9 +54,9 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
         if (StringUtils.contains(response, "errcode")) {
             return null;
         }
-        WeixinUserInfo userInfo = null;
+        WeiXinUserInfo userInfo = null;
         try {
-            userInfo = objectMapper.readValue(response, WeixinUserInfo.class);
+            userInfo = objectMapper.readValue(response, WeiXinUserInfo.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

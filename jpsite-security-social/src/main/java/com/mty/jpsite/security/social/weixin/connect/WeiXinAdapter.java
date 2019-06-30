@@ -1,9 +1,8 @@
 package com.mty.jpsite.security.social.weixin.connect;
 
-import com.mty.jpsite.security.social.weixin.api.Weixin;
-import com.mty.jpsite.security.social.weixin.api.WeixinUserInfo;
+import com.mty.jpsite.security.social.weixin.api.WeiXin;
+import com.mty.jpsite.security.social.weixin.api.WeiXinUserInfo;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
@@ -11,10 +10,11 @@ import org.springframework.social.connect.UserProfile;
 
 /**
  * 微信 api适配器，将微信 api的数据模型转为spring social的标准模型。
+ * @author haha
  */
 @AllArgsConstructor
 @NoArgsConstructor
-public class WeixinAdapter implements ApiAdapter<Weixin> {
+public class WeiXinAdapter implements ApiAdapter<WeiXin> {
     private String openId;
 
     /**
@@ -22,7 +22,7 @@ public class WeixinAdapter implements ApiAdapter<Weixin> {
      * @return
      */
     @Override
-    public boolean test(Weixin api) {
+    public boolean test(WeiXin api) {
         return true;
     }
 
@@ -31,8 +31,8 @@ public class WeixinAdapter implements ApiAdapter<Weixin> {
      * @param values
      */
     @Override
-    public void setConnectionValues(Weixin api, ConnectionValues values) {
-        WeixinUserInfo profile = api.getUserInfo(openId);
+    public void setConnectionValues(WeiXin api, ConnectionValues values) {
+        WeiXinUserInfo profile = api.getUserInfo(openId);
         values.setProviderUserId(profile.getOpenid());
         values.setDisplayName(profile.getNickname());
         values.setImageUrl(profile.getHeadimgurl());
@@ -43,7 +43,7 @@ public class WeixinAdapter implements ApiAdapter<Weixin> {
      * @return
      */
     @Override
-    public UserProfile fetchUserProfile(Weixin api) {
+    public UserProfile fetchUserProfile(WeiXin api) {
         return null;
     }
 
@@ -52,7 +52,7 @@ public class WeixinAdapter implements ApiAdapter<Weixin> {
      * @param message
      */
     @Override
-    public void updateStatus(Weixin api, String message) {
+    public void updateStatus(WeiXin api, String message) {
         //do nothing
     }
 }

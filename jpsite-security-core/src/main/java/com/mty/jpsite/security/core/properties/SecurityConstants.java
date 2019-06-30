@@ -2,6 +2,7 @@ package com.mty.jpsite.security.core.properties;
 
 /**
  * 安全参数常量类
+ * @author haha
  */
 public interface SecurityConstants {
     /**
