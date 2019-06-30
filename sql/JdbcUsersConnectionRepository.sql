@@ -4,7 +4,8 @@
 -- column types, are what is important. Specific column types and sizes that work may vary across database vendors and
 -- the required sizes may vary across API providers. 
 -- QQ登录  微信登录使用   Spring Social
-create table UserConnection (userId varchar(255) not null,
+create table UserConnection (
+  userId varchar(255) not null,
 	providerId varchar(255) not null,
 	providerUserId varchar(255),
 	rank int not null,

@@ -1,5 +1,11 @@
 package com.mty.jpsite.security.social.qq.conf;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.mty.jpsite.server.entity.user.User;
+import com.mty.jpsite.server.entity.userRole.UserRole;
+import com.mty.jpsite.server.service.user.UserService;
+import com.mty.jpsite.server.service.userRole.UserRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
@@ -14,10 +20,19 @@ import org.springframework.stereotype.Component;
 @Conditional(DemoConnectionSignUp.AutoSignUp.class)   //是否自动注册
 @Component
 public class DemoConnectionSignUp implements ConnectionSignUp {
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserRoleService userRoleService;
+
     @Override
     public String execute(Connection<?> connection) {
-        //todo 根据社交用户信息默认创建用户并返回用户唯一标识
-        return connection.getDisplayName();
+        initUser(connection);
+        QueryWrapper query = new QueryWrapper();
+        query.eq("open_id", connection.createData().getProviderUserId());
+        Integer userId = userService.getOne(query).getId();
+        initUserRole(userId);
+        return userId.toString();
     }
 
     static class AutoSignUp implements Condition {
@@ -26,5 +41,21 @@ public class DemoConnectionSignUp implements ConnectionSignUp {
             String value = conditionContext.getEnvironment().getProperty("jpsite.autoSignUp.enable");
             return "true".equals(value);
         }
+    }
+
+    public void initUser(Connection<?> connection) {
+        User user = new User();
+        user.setName(connection.getDisplayName());
+        user.setPassword("a123456..");
+        user.setImageUrl(connection.getImageUrl());
+        user.setOpenId(connection.createData().getProviderUserId());
+        userService.save(user);
+    }
+
+    public void initUserRole(Integer userId) {
+        UserRole userRole = new UserRole();
+        userRole.setUid(userId);
+        userRole.setRoleId(1);
+        userRoleService.save(userRole);
     }
 }

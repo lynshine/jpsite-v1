@@ -21,6 +21,7 @@
         <lombok.version>1.18.2</lombok.version>
         <curator.version>4.2.0</curator.version>
         <jjwt.version>0.7.0</jjwt.version>
+        <spring.version>5.0.10.RELEASE</spring.version>
         <social-security.version>1.1.6.RELEASE</social-security.version>
     </properties>
 
@@ -45,7 +46,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -111,6 +116,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-beans</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
@@ -142,6 +152,11 @@
             <dependency>
                 <groupId>org.springframework.social</groupId>
                 <artifactId>spring-social-security</artifactId>
+                <version>${social-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.social</groupId>
+                <artifactId>spring-social-config</artifactId>
                 <version>${social-security.version}</version>
             </dependency>
             <dependency>

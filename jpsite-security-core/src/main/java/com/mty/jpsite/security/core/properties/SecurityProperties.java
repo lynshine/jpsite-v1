@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 基础安全属性配置类
+ * @author haha
  */
 @ConfigurationProperties(prefix = "jpsite.security")
 @Data
