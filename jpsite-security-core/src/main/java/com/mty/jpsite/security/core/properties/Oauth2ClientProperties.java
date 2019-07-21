@@ -17,7 +17,7 @@ public class Oauth2ClientProperties {
 	 */
 	private String clientSecret;
 	/**
-	 * 针对此应用发出的token的有效时间
+	 * 针对此应用发出的token的有效时间（秒）
 	 */
 	private int accessTokenValidateSeconds = 7200;
 }

@@ -10,7 +10,10 @@ import java.io.Serializable;
  * @author haha
  */
 public class ValidateCodeException extends AuthenticationException implements Serializable {
-
+    /**
+     * 构造方法，调用父类的构造方法
+     * @param msg message
+     */
     public ValidateCodeException(String msg) {
         super(msg);
     }

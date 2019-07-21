@@ -15,17 +15,20 @@ public class BrowserProperties {
      * session管理配置项
      */
     private SessionProperties session = new SessionProperties();
+    /**
+     * 注册地址
+     */
     private String signUpUrl = "/sign_up.html";
     /**
      * 默认登录页面
      */
     private String loginPage = "/login_in.html";
     /**
-     * 默认记住时间
+     * 默认记住时间（秒）
      */
     private int rememberMeSeconds = 3600;
     /**
-     * 默认登录类型JSON
+     * 默认登录返回类型JSON
      */
     private LoginResponseType loginResponseType = LoginResponseType.JSON;
     /**

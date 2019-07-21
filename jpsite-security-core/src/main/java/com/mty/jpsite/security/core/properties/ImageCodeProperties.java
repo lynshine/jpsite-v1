@@ -1,11 +1,13 @@
 package com.mty.jpsite.security.core.properties;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 图片验证码配置项
  * @author haha
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class ImageCodeProperties extends SmsCodeProperties {
     /**

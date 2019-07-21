@@ -13,11 +13,11 @@ public class SmsCodeProperties {
      */
     private int length = 4;
     /**
-     * 过期时间
+     * 过期时间（秒）
      */
     private int expireIn = 60;
     /**
-     * 要拦截的url，多个url用逗号隔开，ant pattern
+     * 要拦截的url，多个url用逗号隔开
      */
     private String url;
 }

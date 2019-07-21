@@ -24,6 +24,7 @@ public class ValidateCode implements Serializable {
 
     public ValidateCode(String code, int expireIn) {
         this.code = code;
+        //返回此LocalDateTime的副本，添加指定秒数之后的日期
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
     }
 

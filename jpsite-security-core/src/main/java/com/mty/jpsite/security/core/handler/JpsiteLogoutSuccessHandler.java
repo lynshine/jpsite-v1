@@ -38,10 +38,8 @@ public class JpsiteLogoutSuccessHandler implements LogoutSuccessHandler {
             throws IOException {
         log.info("====>退出成功");
 
-        /**
-         * 如果signOutSuccessUrl为空，则返回json格式的响应。
-         */
-        if (StringUtils.isBlank(signOutSuccessUrl)) {
+        // 如果signOutSuccessUrl为空，则返回json格式的响应。
+        if (StringUtils.isEmpty(signOutSuccessUrl)) {
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(new SecurityResponse("退出成功")));
         } else {

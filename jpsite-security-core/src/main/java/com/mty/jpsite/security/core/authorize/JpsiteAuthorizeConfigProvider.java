@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.stereotype.Component;
 /**
  * 核心模块的权限认证配置提供者，安全模块涉及的url的授权配置在这里。
- * @order 设置执行顺序，值越小，说明越先被执行
+ * <p>>@order 设置执行顺序，值越小，说明越先被执行</p>
  * @author haha
  */
 @Component

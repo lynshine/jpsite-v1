@@ -27,7 +27,7 @@ public enum ValidateCodeType {
     };
 
     /**
-     * 校验时从请求中获取的参数的名字
+     * 校验时从httpRequest请求中获取参数的名字
      */
     public abstract String getParamNameOnValidate();
 

@@ -11,7 +11,11 @@ import java.io.Serializable;
  * @author haha
  */
 @Data
+// AccessLevel构造方法访问权限
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class SecurityResponse implements Serializable {
+    /**
+     * 响应内容
+     */
     private Object content;
 }
