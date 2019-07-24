@@ -10,6 +10,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 /**
  * 基于session的验证码存取器
+ * @author haha
  */
 @Component
 public class SessionValidateCodeRepository implements ValidateCodeRepository {
@@ -34,7 +35,7 @@ public class SessionValidateCodeRepository implements ValidateCodeRepository {
 
     @Override
     public void save(ServletWebRequest request, ValidateCode validateCode, ValidateCodeType validateCodeType) {
-        /**
+        /*
          * 只取code和过期时间, 存到session, 因为存入redis的内容需要序列化
          */
         ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());

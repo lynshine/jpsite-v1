@@ -17,6 +17,7 @@ import java.util.UUID;
 
 /**
  * 短信认证登录配置 extends {@link SecurityConfigurerAdapter}
+ * @author haha
  */
 @Component
 public class SmsCodeAuthenticationConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {

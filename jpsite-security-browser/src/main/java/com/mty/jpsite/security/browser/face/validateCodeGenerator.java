@@ -5,7 +5,9 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 /**
  * 校验码生成器接口
- * Created by jiangpeng on 2018/11/9.
+ *
+ * @author jiangpeng
+ * @date 2018/11/9
  */
 public interface validateCodeGenerator {
     /**

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * 校验码相关安全配置 extends {@link SecurityConfigurerAdapter}
+ *
+ * @author haha
  */
 @Component("validateCodeSecurityConfig")
 public class ValidateCodeSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
@@ -20,10 +22,7 @@ public class ValidateCodeSecurityConfig extends SecurityConfigurerAdapter<Defaul
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        /**
-         * 加入前置过滤器
-         */
+        // 加入前置过滤器
         http.addFilterBefore(validateCodeFilter, AbstractPreAuthenticatedProcessingFilter.class);
     }
-
 }

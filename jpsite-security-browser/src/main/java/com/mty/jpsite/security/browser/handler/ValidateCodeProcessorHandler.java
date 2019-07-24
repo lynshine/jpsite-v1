@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 校验码处理器管理器
+ * 校验码管理处理器
+ *
+ * @author haha
  */
 @Component
 public class ValidateCodeProcessorHandler {
-
     @Autowired
     private Map<String, ValidateCodeProcess> validateCodeProcessors;
 

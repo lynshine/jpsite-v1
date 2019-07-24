@@ -10,6 +10,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 /**
  * 短信验证码创建实现
+ * @author haha
  */
 @Component("smsValidateCodeProcess")
 public class SmsValidateCodeProcess extends AbstractValidateCodeProcessor<ValidateCode> {

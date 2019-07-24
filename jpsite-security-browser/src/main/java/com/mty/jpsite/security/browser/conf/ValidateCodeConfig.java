@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 验证码相关的扩展点配置。配置在这里的bean，业务系统都可以通过声明同类型或同名的bean来覆盖安全模块默认的配置。
+ * @author haha
  */
 @Configuration
 public class ValidateCodeConfig {
@@ -30,8 +31,7 @@ public class ValidateCodeConfig {
     @Bean
     @ConditionalOnMissingBean(name = "imageCodeGenerator")
     public validateCodeGenerator imageCodeGenerator() {
-        ImageCodeGenerator imageCodeGenerator = new ImageCodeGenerator();
-        return imageCodeGenerator;
+        return new ImageCodeGenerator();
     }
 
     /**

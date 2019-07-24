@@ -10,8 +10,9 @@ import java.io.IOException;
 
 /**
  * 默认的session失效处理策略
+ * @author haha
  */
-public class JpsiteInvalidSessionStrategy extends AbstractSessionStrategy implements InvalidSessionStrategy {
+public class JpsiteInvalidSessionStrategy extends JpsiteSessionStrategy implements InvalidSessionStrategy {
 
 	public JpsiteInvalidSessionStrategy(SecurityProperties securityProperties) {
 		super(securityProperties);

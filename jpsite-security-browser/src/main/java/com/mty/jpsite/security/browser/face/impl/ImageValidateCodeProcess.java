@@ -9,6 +9,7 @@ import java.io.IOException;
 
 /**
  * 图片验证码创建实现
+ * @author haha
  */
 @Component("imageValidateCodeProcess")
 public class ImageValidateCodeProcess extends AbstractValidateCodeProcessor<ImageCode> {

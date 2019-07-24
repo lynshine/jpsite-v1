@@ -1,7 +1,7 @@
 package com.mty.jpsite.controller.security;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.mty.jpsite.security.core.controller.SocialController;
+import com.mty.jpsite.security.core.controller.BaseSocialController;
 import com.mty.jpsite.security.core.domain.SecurityResponse;
 import com.mty.jpsite.security.core.domain.SocialUserInfo;
 import com.mty.jpsite.security.core.properties.SecurityConstants;
@@ -10,8 +10,7 @@ import com.mty.jpsite.server.entity.user.User;
 import com.mty.jpsite.server.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -26,16 +25,18 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * @author haha
+ */
 @Api(description = "浏览器安全控制类")
 @RestController
-public class BrowserSecurityController extends SocialController {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+@Slf4j
+public class BrowserSecurityController extends BaseSocialController {
     /**
      * 原请求内容的缓存及恢复
      */
@@ -62,7 +63,7 @@ public class BrowserSecurityController extends SocialController {
 
         if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();
-            logger.info("====>引发跳转的请求是:" + targetUrl);
+            log.info("====>引发跳转的请求是:" + targetUrl);
 //            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
 //                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
 //            }
@@ -146,7 +147,8 @@ public class BrowserSecurityController extends SocialController {
      */
     @PostMapping("/user/register")
     public String register(User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String phone = user.getPhone();//获取用户名
+        //获取用户名
+        String phone = user.getPhone();
         QueryWrapper<User> wrapper = new QueryWrapper<User>();
         wrapper.eq("phone",phone);
         User result =  userService.getOne(wrapper);

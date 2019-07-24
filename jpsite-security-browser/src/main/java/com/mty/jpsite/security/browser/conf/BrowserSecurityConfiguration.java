@@ -52,43 +52,50 @@ class BrowserSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        formAuthenticationConfig.configure(http);  //表单登录验证
-
-        http.apply(validateCodeSecurityConfig)   // 验证码
+        //表单登录验证
+        formAuthenticationConfig.configure(http);
+        // 验证码
+        http.apply(validateCodeSecurityConfig)
                 .and()
-                .apply(smsCodeAuthenticationConfig)  //短信验证码
+                //短信验证码
+                .apply(smsCodeAuthenticationConfig)
                 .and()
-                .apply(jpSpringSocialConfigurer)  //社交登录
+                //社交登录
+                .apply(jpSpringSocialConfigurer)
                 .and()
-                .rememberMe()    // 记住登录
+                // 记住登录
+                .rememberMe()
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
                 .userDetailsService(userDetailsService)
                 .and()
                 .sessionManagement()
-                .invalidSessionStrategy(invalidSessionStrategy)  // session失效处理策略
-                .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())  //session并发
-                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())  //session的数量达到最大数量之后，是否阻止后来的登录行为
-                .expiredSessionStrategy(sessionInformationExpiredStrategy) // 并发登录导致session失效时，默认的处理策略
+                // session失效处理策略
+                .invalidSessionStrategy(invalidSessionStrategy)
+                //session并发
+                .maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions())
+                //session的数量达到最大数量之后，是否阻止后来的登录行为
+                .maxSessionsPreventsLogin(securityProperties.getBrowser().getSession().isMaxSessionsPreventsLogin())
+                // 并发登录导致session失效时，默认的处理策略
+                .expiredSessionStrategy(sessionInformationExpiredStrategy)
                 .and()
                 .and()
                 .logout()
-                .logoutUrl(securityProperties.getBrowser().getSignOutUrl())  // 退出登录
-                .logoutSuccessHandler(logoutSuccessHandler)  //退出成功处理器
-                .deleteCookies("JSESSIONID")   // 删除浏览器上的session记录
+                // 退出登录
+                .logoutUrl(securityProperties.getBrowser().getSignOutUrl())
+                //退出成功处理器
+                .logoutSuccessHandler(logoutSuccessHandler)
+                // 删除浏览器上的session记录
+                .deleteCookies("JSESSIONID")
                 .and()
                 .csrf().disable();
 
-        /**
-         * 权限授权url配置管理器
-         */
+        // 权限授权url配置管理器
         authorizeConfigManager.config(http.authorizeRequests());
     }
 
     /**
      * 记住我功能的token存取器配置
-     *
-     * @return
      */
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {

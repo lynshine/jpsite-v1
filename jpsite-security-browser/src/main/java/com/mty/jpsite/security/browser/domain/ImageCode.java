@@ -2,12 +2,15 @@ package com.mty.jpsite.security.browser.domain;
 
 import com.mty.jpsite.security.core.domain.ValidateCode;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.awt.image.BufferedImage;
 
 /**
  * 图片验证码 extends {@link ValidateCode}
+ * @author haha
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class ImageCode extends ValidateCode {
     /**
