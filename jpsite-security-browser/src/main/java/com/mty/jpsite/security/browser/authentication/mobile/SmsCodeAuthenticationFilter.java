@@ -2,6 +2,7 @@ package com.mty.jpsite.security.browser.authentication.mobile;
 
 import com.mty.jpsite.security.core.properties.SecurityConstants;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 短信认证登录过滤器
+ * @author haha
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     /**

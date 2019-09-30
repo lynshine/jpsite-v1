@@ -1,8 +1,6 @@
 package com.mty.jpsite.security.social.connect;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,15 +24,14 @@ public class SocialConnectionStatusView  extends AbstractView {
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
                                            HttpServletResponse response) throws Exception {
-        /** key是weixin或qq ， list是否有连接userConnection表*/
+        /* key是weixin或qq ， list是否有连接userConnection表*/
         Map<String, List<Connection<?>>> connection = (Map<String, List<Connection<?>>>) model.get("connectionMap");
-        Map<String, Boolean> result = new HashMap<String, Boolean>(16);
+        Map<String, Boolean> result = new HashMap<>(16);
 
-        for (String key : connection.keySet()) {
-            // value 为false表示没有绑定
-            result.put(key, CollectionUtils.isNotEmpty(connection.get(key)));
+        // value 为false表示没有绑定
+        for (Map.Entry<String, List<Connection<?>>> entry: connection.entrySet()) {
+            result.put(entry.getKey(), CollectionUtils.isNotEmpty(connection.get(entry.getKey())));
         }
-
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(result));
     }

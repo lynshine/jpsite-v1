@@ -3,7 +3,7 @@ package com.mty.jpsite.security.social.common;
 import com.mty.jpsite.security.core.config.JpSpringSocialConfigurer;
 import com.mty.jpsite.security.core.face.SocialAuthenticationFilterPostProcessor;
 import com.mty.jpsite.security.core.properties.SecurityProperties;
-import com.mty.jpsite.security.social.qq.connet.QQConnectionFactory;
+import com.mty.jpsite.security.social.qq.connet.QqConnectionFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +39,7 @@ public class SocialConfig extends SocialConfigurerAdapter implements SocialConfi
     @Autowired
     private DataSource dataSource;
     @Autowired
-    private QQConnectionFactory qqConnectionFactory;
+    private QqConnectionFactory qqConnectionFactory;
     @Autowired
     private SecurityProperties securityProperties;
     /**

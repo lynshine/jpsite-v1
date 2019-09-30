@@ -4,7 +4,7 @@ import com.mty.jpsite.security.core.properties.SecurityProperties;
 import com.mty.jpsite.security.core.properties.WeixinProperties;
 import com.mty.jpsite.security.social.common.SocialConfig;
 import com.mty.jpsite.security.social.connect.SocialConnectView;
-import com.mty.jpsite.security.social.weixin.connect.WeixinConnectionFactory;
+import com.mty.jpsite.security.social.weixin.connect.WeiXinConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,9 +32,9 @@ public class WeiXinAutoConfiguration extends SocialConfig {
      * @return WeixinConnectionFactory
      */
     @Bean
-    public WeixinConnectionFactory weixinConnectionFactory() {
+    public WeiXinConnectionFactory weixinConnectionFactory() {
         WeixinProperties weixinConfig = securityProperties.getSocial().getWeixin();
-        return new WeixinConnectionFactory(weixinConfig.getProviderId(), weixinConfig.getAppId(),
+        return new WeiXinConnectionFactory(weixinConfig.getProviderId(), weixinConfig.getAppId(),
                 weixinConfig.getAppSecret());
     }
 

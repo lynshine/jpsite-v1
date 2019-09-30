@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**
  * 短信登录验证逻辑提供者
  * 由于短信验证码的验证在过滤器里已完成，这里直接读取用户信息即可。
+ * @author haha
  */
 @Data
 @Slf4j

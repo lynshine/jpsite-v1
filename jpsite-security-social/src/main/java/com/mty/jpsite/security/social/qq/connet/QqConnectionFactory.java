@@ -5,6 +5,7 @@ import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 
 /**
  * QQConnectionFactory 继承OAuth2ConnectionFactory
+ * @author haha
  */
 public class QqConnectionFactory extends OAuth2ConnectionFactory<Qq> {
     /**

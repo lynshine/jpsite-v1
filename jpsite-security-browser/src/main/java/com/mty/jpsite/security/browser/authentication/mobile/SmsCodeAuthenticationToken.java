@@ -8,6 +8,7 @@ import java.util.Collection;
 
 /**
  * 短信登录验证信息封装类 extends {@link AbstractAuthenticationToken}
+ * @author haha
  */
 public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;

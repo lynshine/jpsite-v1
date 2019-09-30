@@ -13,7 +13,7 @@ import java.util.Map;
  * @date 2018/12/19
  */
 public class SocialConnectView extends AbstractView {
-    final String CONNECTIONS = "connections";
+    private static final String CONNECTIONS = "connections";
 
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {

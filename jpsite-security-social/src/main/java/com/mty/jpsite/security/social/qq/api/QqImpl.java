@@ -39,7 +39,7 @@ public class QqImpl extends AbstractOAuth2ApiBinding implements Qq {
      */
     @Override
     public QqUserInfo getUserInfo() {
-        /**拼接url*/
+        /*拼接url*/
         String url = String.format(URL_GET_USERINFO, appId, openId);
         String result = getRestTemplate().getForObject(url, String.class);
 

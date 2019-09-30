@@ -30,9 +30,9 @@ public class QqAdapter implements ApiAdapter<Qq> {
 
         values.setDisplayName(userInfo.getNickname());
         values.setImageUrl(userInfo.getFigureurl_qq_1());
-        /**个人主页*/
+        /*个人主页*/
         values.setProfileUrl(null);
-        /**服务商用户ID*/
+        /*服务商用户ID*/
         values.setProviderUserId(userInfo.getOpenId());
     }
 

@@ -1,6 +1,7 @@
 package com.mty.jpsite.security.social.weixin.api;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.social.oauth2.AccessGrant;
 
 /**
@@ -8,6 +9,7 @@ import org.springframework.social.oauth2.AccessGrant;
  * 所以在这里继承了标准AccessGrant，添加了openId字段，作为对微信access_token信息的封装。
  * @author haha
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class WeiXinAccessGrant extends AccessGrant {
     private static final long serialVersionUID = -7243374526633186782L;
